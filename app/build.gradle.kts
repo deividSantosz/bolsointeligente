@@ -29,10 +29,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
     val room_version = "2.6.1"
 
     annotationProcessor("androidx.room:room-compiler:$room_version")

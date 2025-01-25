@@ -1,4 +1,4 @@
-package com.example.bolsointeligente;
+package com.example.bolsointeligente.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.database.Database;
 import com.example.bolsointeligente.database.Usuario;
 
