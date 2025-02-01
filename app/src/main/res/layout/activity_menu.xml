@@ -228,7 +228,7 @@
         app:layout_constraintTop_toTopOf="@+id/fundoCurvado3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_add_transacao"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="80dp"
@@ -264,6 +264,13 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plus" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

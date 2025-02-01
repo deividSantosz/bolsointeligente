@@ -8,11 +8,11 @@
         android:icon="@drawable/bar"
         android:title="Stats" />
     <item
-        android:id="@+id/wallet"
+        android:id="@+id/Transacoes"
         android:icon="@drawable/wallet"
-        android:title="Wallet" />
+        android:title="Transações" />
     <item
         android:id="@+id/perfil"
         android:icon="@drawable/user"
-        android:title="Profile" />
+        android:title="Perfil" />
 </menu>
