@@ -33,6 +33,11 @@ public class MenuActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
+                if (item.getItemId() == R.id.Transacoes) {
+                    Intent intent = new Intent(MenuActivity.this, TransacoesActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
                 return false;
             }
 
