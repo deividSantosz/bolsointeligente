@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primaria">#429690</color>
     <color name="secundaria">#29756F</color>
+    <color name="vermelho">#FF0000</color>
 </resources>

@@ -210,22 +210,24 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="392dp"
+        android:layout_marginBottom="16dp"
         android:text="Ver todos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/rv_transacoes_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/fundoCurvado3"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toEndOf="@+id/textView13" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="352dp"
+        android:id="@+id/rv_transacoes_menu"
+        android:layout_width="380dp"
+        android:layout_height="319dp"
+        android:layout_marginTop="322dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fundoCurvado3" />
+        app:layout_constraintTop_toTopOf="@+id/fundoCurvado3"
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
         android:id="@+id/btn_add_transacao"
@@ -265,12 +267,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plus" />
 
-    <FrameLayout
+    <!-- >> <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigationView"
+        android:layout_above="@id/bottomNavigationView"s
         app:layout_constraintEnd_toEndOf="parent" />
-
+ -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,4 +21,9 @@ public interface UsuarioDao {
     @Insert
     public long insereUsuario(Usuario usuario);
 
+    @Transaction
+    @Query("SELECT * FROM usuario WHERE id = :userId")
+    UsuarioTransacao getTransacoesByUserId(long userId);
+
+
 }
