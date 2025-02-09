@@ -1,15 +1,16 @@
 pluginManagement {
     repositories {
         google()
-        mavenCentral()
+        mavenCentral() // Substituto para jcenter()
         gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
-        mavenCentral()
+        google() // Primeiro para repositórios Android
+        mavenCentral() // Substituto para jcenter()
+        maven("https://jitpack.io") // JitPack para dependências personalizadas
     }
 }
 

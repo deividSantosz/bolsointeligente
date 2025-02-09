@@ -37,8 +37,6 @@ public class ListaTransacoesAdapter extends RecyclerView.Adapter<ViewHolderLista
     public void onBindViewHolder(@NonNull ViewHolderListaTransacoes holder, int position) {
 
         Transacao transacao = listaTransacoes.get(position);
-
-        Log.d("ListaTransacoes", "Posição: " + position + " Tamanho da lista: " + listaTransacoes.size());
         Date dataTransacao = new Date(transacao.getData());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String dataFormatada = formatter.format(dataTransacao);
@@ -46,6 +44,36 @@ public class ListaTransacoesAdapter extends RecyclerView.Adapter<ViewHolderLista
 
         holder.txt_categoria.setText(transacao.getCategoria());
 
+        if (holder.txt_categoria.getText() == "Saúde") {
+            holder.img_categoria.setImageResource(R.drawable.saude);
+        }
+        if (holder.txt_categoria.getText() == "Investimentos") {
+            holder.img_categoria.setImageResource(R.drawable.investimetos);
+        }
+        if (holder.txt_categoria.getText() == "Educação") {
+            holder.img_categoria.setImageResource(R.drawable.educacao);
+        }
+        if (holder.txt_categoria.getText() == "Alimentação") {
+            holder.img_categoria.setImageResource(R.drawable.alimentacao);
+        }
+         if (holder.txt_categoria.getText() == "Outros") {
+            holder.img_categoria.setImageResource(R.drawable.outros);
+        }
+        if (holder.txt_categoria.getText() == "Moradia") {
+            holder.img_categoria.setImageResource(R.drawable.moradia);
+        }
+        if (holder.txt_categoria.getText() == "Animal") {
+            holder.img_categoria.setImageResource(R.drawable.animal);
+        }
+        if (holder.txt_categoria.getText() == "Transporte") {
+            holder.img_categoria.setImageResource(R.drawable.transporte);
+        }
+        if (holder.txt_categoria.getText() == "Beleza") {
+            holder.img_categoria.setImageResource(R.drawable.beleza);
+        }
+        if (holder.txt_categoria.getText() == "Lazer") {
+            holder.img_categoria.setImageResource(R.drawable.lazer);
+        }
         if (transacao.getValor()<0) {
             holder.txt_valor.setText(String.format(Locale.getDefault(), "R$ %.2f", transacao.getValor()));
             holder.txt_valor.setTextColor(activityContext.getResources().getColor(R.color.vermelho));

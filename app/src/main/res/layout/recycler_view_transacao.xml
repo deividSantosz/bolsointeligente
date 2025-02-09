@@ -3,6 +3,17 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
+    <!-- Imagem da categoria -->
+    <ImageView
+        android:id="@+id/img_categoria"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/alimentacao"
+        android:contentDescription="Ícone da Categoria" />
+
     <!-- Categoria e Data à esquerda -->
     <TextView
         android:id="@+id/txt_categoria"
@@ -12,7 +23,8 @@
         android:text="Alimentação"
         android:textColor="@color/primaria"
         android:textSize="20sp"
-        android:layout_alignParentLeft="true"
+        android:layout_toEndOf="@id/img_categoria"
+        android:layout_alignTop="@id/img_categoria"
         android:layout_marginEnd="8dp" />
 
     <TextView
@@ -23,7 +35,7 @@
         android:text="22 de janeiro"
         android:textSize="12sp"
         android:layout_below="@id/txt_categoria"
-        android:layout_alignParentLeft="true" />
+        android:layout_toEndOf="@id/img_categoria" />
 
     <!-- Valor e Descrição à direita -->
     <TextView

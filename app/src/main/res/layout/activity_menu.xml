@@ -207,7 +207,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cartao" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/txt_ver_todos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -267,12 +267,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plus" />
 
-    <!-- >> <FrameLayout
+    <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigationView"s
+        android:layout_above="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent" />
- -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

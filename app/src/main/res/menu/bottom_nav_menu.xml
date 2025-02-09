@@ -4,9 +4,9 @@
         android:icon="@drawable/home"
         android:title="Home" />
     <item
-        android:id="@+id/dados"
+        android:id="@+id/estatisticas"
         android:icon="@drawable/bar"
-        android:title="Dados" />
+        android:title="Estatisticas" />
     <item
         android:id="@+id/Transacoes"
         android:icon="@drawable/wallet"

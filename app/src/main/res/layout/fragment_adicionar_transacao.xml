@@ -17,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <!-- Card para o formulário -->
     <TextView
         android:id="@+id/tv_add_transaction_title"
         android:layout_width="wrap_content"
@@ -48,7 +47,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Tabs para renda e despesa -->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_income_expense"
                 android:layout_width="match_parent"
@@ -67,7 +65,6 @@
                     android:text="Expense" />
             </com.google.android.material.tabs.TabLayout>
 
-            <!-- Campo: Valor -->
             <EditText
                 android:id="@+id/et_amount"
                 android:layout_width="match_parent"
@@ -77,9 +74,6 @@
                 android:inputType="numberDecimal"
                 android:paddingEnd="16dp" />
 
-            <!-- Campo: Descrição -->
-
-            <!-- Campo: Categoria (AutoCompleteTextView) -->
             <EditText
                 android:id="@+id/editTextTextMultiLine"
                 android:layout_width="match_parent"
@@ -98,8 +92,6 @@
                 android:hint="Escolha uma categoria"
                 android:importantForAccessibility="yes"
                 android:inputType="text" />
-
-            <!-- Campo: Data -->
 
             <EditText
                 android:id="@+id/et_date"
