@@ -8,14 +8,14 @@
     tools:context=".activities.MenuActivity">
 
     <com.example.bolsointeligente.view.FundoCurvado
-        android:id="@+id/fundoCurvado3"
-        android:layout_width="414dp"
-        android:layout_height="226dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+    android:id="@+id/fundoCurvado3"
+    android:layout_width="414dp"
+    android:layout_height="226dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.666"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="MissingConstraints" />
 
     <com.example.bolsointeligente.view.Cartao
         android:id="@+id/cartao"
