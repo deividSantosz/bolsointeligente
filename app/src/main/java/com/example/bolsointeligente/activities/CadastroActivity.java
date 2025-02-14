@@ -18,22 +18,23 @@ public class CadastroActivity extends AppCompatActivity {
 
     EditText editNome, editEmail, editSenha, editTelefone;
     Button btnCadastrar;
+    Database db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
+        db = Room.databaseBuilder(getApplicationContext(), Database.class, "Bolso Inteligente DB")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
         editNome = findViewById(R.id.editNome);
         editEmail = findViewById(R.id.editEmail);
         editTelefone = findViewById(R.id.editTelefone);
-        editSenha = findViewById(R.id.editSenha);
+        editSenha = findViewById(R.id.edit_senha_cadastro);
         btnCadastrar = findViewById(R.id.btnCadastrar);
-
 
         btnCadastrar.setOnClickListener((View view ) -> {
             cadastro();
-            Intent intent = new Intent(this, Menu.class);
-            startActivity(intent);
         });
     }
 
@@ -45,8 +46,10 @@ public class CadastroActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String telefone = editTelefone.getText().toString();
         String senha = editSenha.getText().toString();
-        if (validarCadastro(nome, email, telefone, senha) == true) {
+        if (validarCadastro(email) == true) {
             CadastrarUsuario(nome, email, telefone, senha);
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
         }
 
     }
@@ -72,11 +75,7 @@ public class CadastroActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validarCadastro(String nome, String email, String telefone, String senha) {
-        Database db = Room.databaseBuilder(getApplicationContext(),Database.class,"Bolso inteligente BD")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
+    private boolean validarCadastro(String email) {
         Usuario usuario = db.usuarioDao().getUserCadastro(email);
         if (usuario!=null) {
             return false;
@@ -85,10 +84,6 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     private void CadastrarUsuario(String nome, String email, String telefone, String senha) {
-        Database db = Room.databaseBuilder(getApplicationContext(),Database.class,"Bolso inteligente BD")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
         Usuario usuario = new Usuario();
 
         usuario.nome = nome;

@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0.052" />
 
     <EditText
-        android:id="@+id/editNomeLogin"
+        android:id="@+id/edit_Email"
         android:layout_width="367dp"
         android:layout_height="50dp"
         android:layout_marginTop="356dp"
@@ -43,17 +43,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editSenhaLogin"
+        android:id="@+id/edit_senha_cadastro"
         android:layout_width="367dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Senha"
-        android:inputType="text"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNomeLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_Email"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnEntrar"
@@ -69,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSenhaLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_senha_cadastro" />
 
     <Button
         android:id="@+id/btnCadastrar"
@@ -85,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSenhaLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_senha_cadastro" />
 
     <TextView
         android:id="@+id/textView2"

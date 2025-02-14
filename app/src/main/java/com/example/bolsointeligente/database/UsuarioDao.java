@@ -14,6 +14,8 @@ public interface UsuarioDao {
 
     @Query("SELECT * FROM usuario WHERE id=:id")
     public Usuario getUserById(long id);
+    @Query("SELECT * FROM usuario WHERE email=:email AND senha=:senha")
+    public Usuario getUserLogin(String email, String senha);
 
     @Query("SELECT * FROM usuario WHERE email=:email")
     public Usuario getUserCadastro( String email);

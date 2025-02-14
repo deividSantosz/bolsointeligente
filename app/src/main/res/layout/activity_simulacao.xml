@@ -43,7 +43,7 @@
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart_projecao"
-            android:layout_width="455dp"
+            android:layout_width="0dp"
             android:layout_height="288dp"
             android:layout_marginTop="176dp"
             app:layout_constraintEnd_toEndOf="parent"
