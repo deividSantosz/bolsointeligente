@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.bolsointeligente.database.Database;
+import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,11 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.activities.listaTransacoes.ListaTransacoesAdapter;
 import com.example.bolsointeligente.database.Transacao;
+import com.example.bolsointeligente.database.TransacaoDao;
 import com.example.bolsointeligente.fragments.AdicionarTransacao;
+import com.example.bolsointeligente.singleton.UsuarioSingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -27,38 +32,33 @@ public class MenuActivity extends AppCompatActivity {
     Button btnAddTransacao;
     RecyclerView rv_lista_transacoes;
     TextView txt_ver_todos;
+    ListaTransacoesAdapter adapter;
+    Database db;
+    private int usuarioId;
+    private TransacaoDao transacaoDao;
     public BottomNavigationView bottomNavigationView;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+        db = Room.databaseBuilder(getApplicationContext(), com.example.bolsointeligente.database.Database.class, "Bolso Inteligente DB")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         btnAddTransacao = findViewById(R.id.btn_add_transacao);
         rv_lista_transacoes = findViewById(R.id.rv_transacoes_menu);
         txt_ver_todos = findViewById(R.id.txt_ver_todos);
-        // Dados fictícios
-        List<Transacao> listaTransacoes = new ArrayList<>();
-        listaTransacoes.add(new Transacao(1, - 150.0, "Pagamento de salário", "Alimentação", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(2, -50.0, "Compra supermercado", "Educação", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(3, 200.0, "Venda de item", "Outros", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(4, -30.0, "Almoço", "Investimentos", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -100.0, "Pagamento de contas", "Saúde", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -80.0, "Pagamento de contas", "Transporte", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -100.0, "Pagamento de contas", "Beleza", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -500, "Pagamento de contas", "Lazer", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -67, "Pagamento de contas", "Animal", System.currentTimeMillis(), 1));
-        int maxItens = 4; // Limite de itens a serem exibidos
-        List<Transacao> listaLimitada = listaTransacoes.subList(0, Math.min(listaTransacoes.size(), maxItens));
 
-
-
+        usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
+        transacaoDao = db.transacaoDao();
+        adapter = new ListaTransacoesAdapter(new ArrayList<>(), this);
         rv_lista_transacoes.setLayoutManager(new LinearLayoutManager(this));
-        ListaTransacoesAdapter adapter = new ListaTransacoesAdapter(listaLimitada, this);
         rv_lista_transacoes.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
+        // Agora chama o método para carregar as transações
+        carregarTransacoes();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -107,4 +107,13 @@ public class MenuActivity extends AppCompatActivity {
            startActivity(intent);
        });
 }
+
+private void carregarTransacoes() {
+        List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
+        if (transacoes != null && !transacoes.isEmpty()) {
+            adapter.listaTransacoes.clear();
+            adapter.listaTransacoes.addAll(transacoes);
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

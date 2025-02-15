@@ -17,7 +17,6 @@ import java.util.Date;
 public class Transacao {
     @PrimaryKey(autoGenerate = true)
     public long id;
-
     private double valor;
     private String descricao;
     private String categoria;

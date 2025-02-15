@@ -57,16 +57,16 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Income" />
+                    android:text="Entrada" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Expense" />
+                    android:text="Saída" />
             </com.google.android.material.tabs.TabLayout>
 
             <EditText
-                android:id="@+id/et_amount"
+                android:id="@+id/edit_valor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -75,7 +75,7 @@
                 android:paddingEnd="16dp" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/edit_descricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -94,7 +94,7 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_date"
+                android:id="@+id/edit_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

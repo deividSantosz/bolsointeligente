@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class ListaTransacoesAdapter extends RecyclerView.Adapter<ViewHolderListaTransacoes> {
 
-    private List<Transacao> listaTransacoes;
+    public List<Transacao> listaTransacoes;
     private Context activityContext;
 
     public ListaTransacoesAdapter(List<Transacao> listaTransacoes, Context activityContext) {
@@ -89,3 +89,4 @@ public class ListaTransacoesAdapter extends RecyclerView.Adapter<ViewHolderLista
         return listaTransacoes.size();
     }
 }
+

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,7 +15,10 @@ import android.view.MenuItem;
 
 import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.activities.listaTransacoes.ListaTransacoesAdapter;
+import com.example.bolsointeligente.database.Database;
 import com.example.bolsointeligente.database.Transacao;
+import com.example.bolsointeligente.database.TransacaoDao;
+import com.example.bolsointeligente.singleton.UsuarioSingleton;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -31,13 +35,19 @@ public class EstatisticasActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     RecyclerView recyclerView;
     List<Transacao> listaTransacoes = new ArrayList<>();
-
+    ListaTransacoesAdapter adapter;
+    Database db;
+    private int usuarioId;
+    private TransacaoDao transacaoDao;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estatisticas);
-
+        db = Room.databaseBuilder(getApplicationContext(), com.example.bolsointeligente.database.Database.class, "Bolso Inteligente DB")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         recyclerView = findViewById(R.id.rv_transactions_estatisticas);
         lineChart = findViewById(R.id.line_chart);
@@ -45,28 +55,15 @@ public class EstatisticasActivity extends AppCompatActivity {
         setupLineChart();
 
         // Configurar a lista de transações
+        usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
+        transacaoDao = db.transacaoDao();
+        adapter = new ListaTransacoesAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // Adicione um adapter aqui para as transações
-
-        listaTransacoes.add(new Transacao(1, - 150.0, "Pagamento de salário", "Alimentação", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(2, -50.0, "Compra supermercado", "Educação", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(3, 200.0, "Venda de item", "Outros", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(4, -30.0, "Almoço", "Investimentos", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -100.0, "Pagamento de contas", "Saúde", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -80.0, "Pagamento de contas", "Transporte", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -100.0, "Pagamento de contas", "Beleza", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -500, "Pagamento de contas", "Lazer", System.currentTimeMillis(), 1));
-        listaTransacoes.add(new Transacao(5, -67, "Pagamento de contas", "Animal", System.currentTimeMillis(), 1));
-
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        recyclerView.setAdapter(null);
-
-        ListaTransacoesAdapter adapter = new ListaTransacoesAdapter(listaTransacoes, this);
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
+        // Agora chama o método para carregar as transações
+        carregarTransacoes();
+
         setupLineChart();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -133,5 +130,12 @@ public class EstatisticasActivity extends AppCompatActivity {
         lineChart.setDrawGridBackground(false);
         lineChart.invalidate(); // Atualizar o gráfico
     }
-
+    private void carregarTransacoes() {
+        List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
+        if (transacoes != null && !transacoes.isEmpty()) {
+            adapter.listaTransacoes.clear();
+            adapter.listaTransacoes.addAll(transacoes);
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

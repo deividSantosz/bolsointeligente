@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.database.Database;
 import com.example.bolsointeligente.database.Usuario;
+import com.example.bolsointeligente.singleton.UsuarioSingleton;
 
 import java.util.List;
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean validarLogin(String email, String senha){
         Usuario usuario = db.usuarioDao().getUserLogin(email,senha);
         if (usuario!=null) {
+            UsuarioSingleton.getInstance().setUserId(usuario.getId());
             return true;
         }
         else
@@ -89,13 +91,6 @@ public class MainActivity extends AppCompatActivity {
         if (!listaUsuarios.isEmpty()) {
             return;
         }
-
-        Usuario master = new Usuario();
-        master.nome =  "master";
-        master.email = "master123@gmail.com";
-        master.telefone = "73998513975";
-        master.senha = "master123";
-        db.usuarioDao().insereUsuario(master);
 
         Usuario usuario = new Usuario();
         usuario.nome = "teste";
