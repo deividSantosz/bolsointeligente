@@ -13,4 +13,7 @@ public interface TransacaoDao {
 
     @Query("SELECT * FROM transacao WHERE idUsuario = :usuarioId")
     List<Transacao> listarTransacoesPorUsuario(int usuarioId);
+
+    @Query("SELECT SUM(valor) FROM transacao WHERE idUsuario = :usuarioId")
+    Double getTotalTransacoesPorUsuario(int usuarioId);
 }
