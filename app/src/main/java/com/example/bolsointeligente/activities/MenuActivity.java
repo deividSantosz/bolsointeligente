@@ -31,18 +31,20 @@ public class MenuActivity extends AppCompatActivity {
 
     Button btnAddTransacao;
     RecyclerView rv_lista_transacoes;
-    TextView txt_ver_todos;
+    TextView txt_ver_todos, txtNome;
     ListaTransacoesAdapter adapter;
     Database db;
     private int usuarioId;
     private TransacaoDao transacaoDao;
-    public BottomNavigationView bottomNavigationView;
+
+     BottomNavigationView bottomNavigationView;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        db = Room.databaseBuilder(getApplicationContext(), com.example.bolsointeligente.database.Database.class, "Bolso Inteligente DB")
+        db = Room.databaseBuilder(getApplicationContext(), Database.class, "Bolso Inteligente DB")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
@@ -50,8 +52,10 @@ public class MenuActivity extends AppCompatActivity {
         btnAddTransacao = findViewById(R.id.btn_add_transacao);
         rv_lista_transacoes = findViewById(R.id.rv_transacoes_menu);
         txt_ver_todos = findViewById(R.id.txt_ver_todos);
+        txtNome = findViewById(R.id.textNomeMenu);
 
         usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
+        txtNome.setText(UsuarioSingleton.getInstance().getuserNome());
         transacaoDao = db.transacaoDao();
         adapter = new ListaTransacoesAdapter(new ArrayList<>(), this);
         rv_lista_transacoes.setLayoutManager(new LinearLayoutManager(this));

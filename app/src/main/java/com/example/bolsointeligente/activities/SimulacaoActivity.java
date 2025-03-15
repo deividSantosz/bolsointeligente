@@ -1,8 +1,12 @@
 package com.example.bolsointeligente.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +23,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,9 +36,11 @@ public class SimulacaoActivity extends AppCompatActivity {
     private Spinner spTipoInvestimento;
     private Button btnSimular;
     private LineChart chartProjecao;
-    private TextView tvResultado;
+    private TextView tvResultado, txtInvestir;
+    BottomNavigationView bottomNavigationView;
     Map<String, Double> taxas = new HashMap<>();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +53,19 @@ public class SimulacaoActivity extends AppCompatActivity {
         btnSimular = findViewById(R.id.btn_simular);
         chartProjecao = findViewById(R.id.chart_projecao);
         tvResultado = findViewById(R.id.tv_resultado);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        txtInvestir = findViewById(R.id.txt_Investir);
+
 
         String[] tiposInvestimento = {"Escolha a categoria de investimento", "Poupança", "CDB", "Ações"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tiposInvestimento);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTipoInvestimento.setAdapter(adapter);
-
         taxas.put("Poupança", 5.0); // 5% ao ano
         taxas.put("CDB", 8.0); // 8% ao ano
         taxas.put("Ações", 15.0); // 15% ao ano
+
+        configurarGrafico();
         btnSimular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,9 +73,42 @@ public class SimulacaoActivity extends AppCompatActivity {
             }
         });
 
-        // Configurar o gráfico
-        configurarGrafico();
+        txtInvestir.setOnClickListener((View view ) -> {
+            Intent intent = new Intent(SimulacaoActivity.this, InvestimentosActivity.class);
+            startActivity(intent);
+
+        });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.perfil) {
+                    Intent intent = new Intent(SimulacaoActivity.this, PerfilActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                else if (item.getItemId() == R.id.estatisticas) {
+                    Intent intent = new Intent(SimulacaoActivity.this, EstatisticasActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                else if (item.getItemId() == R.id.home) {
+                    Intent intent = new Intent(SimulacaoActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                else if (item.getItemId() == R.id.simulador) {
+                    Intent intent = new Intent(SimulacaoActivity.this, SimulacaoActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+
+        });
     }
+
+
 
     private void configurarGrafico() {
         chartProjecao.getDescription().setEnabled(false);

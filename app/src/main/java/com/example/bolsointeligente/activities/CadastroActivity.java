@@ -3,6 +3,7 @@ package com.example.bolsointeligente.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,9 +17,10 @@ import com.example.bolsointeligente.database.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    EditText editNome, editEmail, editSenha, editTelefone;
+    EditText editNome, editEmail, editSenha, editTelefone, editRenda;
     Button btnCadastrar;
     Database db;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class CadastroActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editTelefone = findViewById(R.id.editTelefone);
         editSenha = findViewById(R.id.edit_senha_cadastro);
+        editRenda = findViewById(R.id.editRenda);
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
         btnCadastrar.setOnClickListener((View view ) -> {
@@ -46,8 +49,9 @@ public class CadastroActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String telefone = editTelefone.getText().toString();
         String senha = editSenha.getText().toString();
+        Double renda = Double.parseDouble(editRenda.getText().toString());
         if (validarCadastro(email) == true) {
-            CadastrarUsuario(nome, email, telefone, senha);
+            CadastrarUsuario(nome, email, telefone, senha, renda);
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         }
@@ -83,13 +87,14 @@ public class CadastroActivity extends AppCompatActivity {
         return true;
     }
 
-    private void CadastrarUsuario(String nome, String email, String telefone, String senha) {
+    private void CadastrarUsuario(String nome, String email, String telefone, String senha, Double renda) {
         Usuario usuario = new Usuario();
 
         usuario.nome = nome;
         usuario.email = email;
         usuario.telefone = telefone;
         usuario.senha = senha;
+        usuario.renda = renda;
 
         db.usuarioDao().insereUsuario(usuario);
     }

@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Usuario usuario = db.usuarioDao().getUserLogin(email,senha);
         if (usuario!=null) {
             UsuarioSingleton.getInstance().setUserId(usuario.getId());
+            UsuarioSingleton.getInstance().setuserNome(usuario.getNome());
             return true;
         }
         else

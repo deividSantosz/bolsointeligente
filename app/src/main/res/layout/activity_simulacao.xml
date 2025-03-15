@@ -71,9 +71,11 @@
             android:hint="Tempo (anos)"
             android:inputType="number"
             android:padding="10dp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_valor_inicial" />
+
 
         <Spinner
             android:id="@+id/sp_tipo_investimento"
@@ -92,7 +94,7 @@
             android:id="@+id/btn_simular"
             android:layout_width="256dp"
             android:layout_height="59dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:backgroundTint="@color/primaria"
             android:text="Simular"
             android:textColorHighlight="@color/primaria"
@@ -100,6 +102,7 @@
             android:textSize="25sp"
             app:cornerRadius="13sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sp_tipo_investimento" />
 
@@ -136,6 +139,23 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_simular" />
+
+        <TextView
+            android:id="@+id/txt_Investir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Quer aprender a investir? Clique aqui!"
+            android:textColor="@color/primaria"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@id/tv_resultado"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

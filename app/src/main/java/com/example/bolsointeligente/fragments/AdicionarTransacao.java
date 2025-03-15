@@ -22,6 +22,7 @@ import com.example.bolsointeligente.database.Database;
 import com.example.bolsointeligente.database.Transacao;
 import com.example.bolsointeligente.database.TransacaoDao;
 import com.example.bolsointeligente.singleton.UsuarioSingleton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,7 +34,8 @@ public class AdicionarTransacao extends Fragment {
     private EditText editDescricao, editValor, editDate;
     private Button btnAddTransaction;
     Database db;
-
+    private TabLayout tabLayout;
+    private boolean isSaida = false;
     private TransacaoDao transacaoDao;
     private int usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
 
@@ -62,6 +64,7 @@ public class AdicionarTransacao extends Fragment {
                 .build();
 
         // Inicializar os campos
+        tabLayout = view.findViewById(R.id.tab_income_expense);
         autoCompleteCategory = view.findViewById(R.id.autoCompleteCategory);
         editDescricao = view.findViewById(R.id.edit_descricao);
         editValor = view.findViewById(R.id.edit_valor);
@@ -85,6 +88,18 @@ public class AdicionarTransacao extends Fragment {
         // Configurar campo de data para abrir um DatePickerDialog
         editDate.setOnClickListener(v -> mostrarDatePicker());
 
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                isSaida = tab.getPosition() == 1; // Índice 1 representa "Saída"
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
         // Configurar botão para salvar a transação
         btnAddTransaction.setOnClickListener(view2 -> {
             salvarTransacao(); // Salva a transação antes de trocar de tela
@@ -118,6 +133,9 @@ public class AdicionarTransacao extends Fragment {
         }
 
         double valor = Double.parseDouble(valorTexto);
+        if (isSaida) {
+            valor = -valor; // Se for uma saída, transforma o valor em negativo
+        }
         long data = calendario.getTimeInMillis(); // Converte a data para timestamp
 
         Transacao transacao = new Transacao();
