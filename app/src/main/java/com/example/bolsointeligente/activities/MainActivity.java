@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                  .fallbackToDestructiveMigration()
                  .allowMainThreadQueries()
                  .build();
-
          insereDadosUsuario();
          btnEntrar = findViewById(R.id.btnEntrar);
          btnCadastrar = findViewById(R.id.btnCadastrar);

@@ -5,6 +5,7 @@ public class UsuarioSingleton {
     private static UsuarioSingleton instance;
     private long userId;
     private String userNome;
+    private Double userRenda;
 
     public static synchronized UsuarioSingleton getInstance() {
         if (instance == null) {
@@ -26,5 +27,13 @@ public class UsuarioSingleton {
 
     public void setuserNome(String userNome) {
         this.userNome = userNome;
+    }
+
+    public Double getUserRenda() {
+        return userRenda;
+    }
+
+    public void setUserRenda(Double userRenda) {
+        this.userRenda = userRenda;
     }
 }

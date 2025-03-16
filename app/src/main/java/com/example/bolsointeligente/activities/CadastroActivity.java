@@ -19,6 +19,8 @@ public class CadastroActivity extends AppCompatActivity {
 
     EditText editNome, editEmail, editSenha, editTelefone, editRenda;
     Button btnCadastrar;
+    String rendaString;
+    Double renda = 0.0;
     Database db;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,11 +51,24 @@ public class CadastroActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String telefone = editTelefone.getText().toString();
         String senha = editSenha.getText().toString();
-        Double renda = Double.parseDouble(editRenda.getText().toString());
+        rendaString = editRenda.getText().toString();
+        if (rendaString == null || rendaString.trim().isEmpty()) {
+            editRenda.setError("Renda obrigatória!");
+            return;
+        }
+        try {
+            // Tente converter o valor para Double
+            renda = Double.parseDouble(rendaString);
+        } catch (NumberFormatException e) {
+            // Se o valor não for válido, mostre um erro
+            editRenda.setError("Valor inválido para renda!");
+            return;
+        }
         if (validarCadastro(email) == true) {
             CadastrarUsuario(nome, email, telefone, senha, renda);
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -74,6 +89,10 @@ public class CadastroActivity extends AppCompatActivity {
         }
         if(editSenha.getText().toString().trim().equals("")){
             editSenha.setError("Senha obrigatória!");
+            return false;
+        }
+        if(editRenda.getText().toString().trim().equals("")){
+            editRenda.setError("Renda obrigatória!");
             return false;
         }
         return true;

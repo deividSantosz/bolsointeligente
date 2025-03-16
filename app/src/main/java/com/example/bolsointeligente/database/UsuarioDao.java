@@ -19,6 +19,8 @@ public interface UsuarioDao {
 
     @Query("SELECT * FROM usuario WHERE email=:email")
     public Usuario getUserCadastro( String email);
+   @Query("SELECT renda FROM usuario WHERE id=:id")
+    public Double getUserRenda(long id);
 
     @Insert
     public long insereUsuario(Usuario usuario);

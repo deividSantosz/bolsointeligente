@@ -10,11 +10,11 @@ import androidx.room.Room;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.activities.listaTransacoes.ListaTransacoesAdapter;
@@ -24,6 +24,7 @@ import com.example.bolsointeligente.fragments.AdicionarTransacao;
 import com.example.bolsointeligente.singleton.UsuarioSingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class MenuActivity extends AppCompatActivity {
 
     Button btnAddTransacao;
     RecyclerView rv_lista_transacoes;
-    TextView txt_ver_todos, txtNome;
+    TextView txt_ver_todos, txtNome, txt_renda, txt_despesas, txt_saldo;
     ListaTransacoesAdapter adapter;
     Database db;
     private int usuarioId;
@@ -53,6 +54,9 @@ public class MenuActivity extends AppCompatActivity {
         rv_lista_transacoes = findViewById(R.id.rv_transacoes_menu);
         txt_ver_todos = findViewById(R.id.txt_ver_todos);
         txtNome = findViewById(R.id.textNomeMenu);
+        txt_renda = findViewById(R.id.txt_renda);
+        txt_despesas = findViewById(R.id.txt_despesas);
+        txt_saldo = findViewById(R.id.txt_saldo);
 
         usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
         txtNome.setText(UsuarioSingleton.getInstance().getuserNome());
@@ -61,7 +65,7 @@ public class MenuActivity extends AppCompatActivity {
         rv_lista_transacoes.setLayoutManager(new LinearLayoutManager(this));
         rv_lista_transacoes.setAdapter(adapter);
 
-        // Agora chama o método para carregar as transações
+        atualizarDadosFinanceiros();
         carregarTransacoes();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -95,12 +99,10 @@ public class MenuActivity extends AppCompatActivity {
        btnAddTransacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Criando uma instância do fragmento
                 AdicionarTransacao fragment = new AdicionarTransacao();
 
-                // Iniciando a transação para substituir o conteúdo do FrameLayout
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentContainer, fragment) // Aqui estamos substituindo o fragmento atual pelo novo
+                        .replace(R.id.fragmentContainer, fragment)
                         .addToBackStack(null) // Para permitir que o usuário volte para a tela anterior
                         .commit();
             }
@@ -120,4 +122,23 @@ private void carregarTransacoes() {
             adapter.notifyDataSetChanged();
         }
     }
+    private void atualizarDadosFinanceiros() {
+        List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
+        Double renda =  db.usuarioDao().getUserRenda(usuarioId);
+
+        Double despesas = 0.0;
+        for (Transacao transacao : transacoes) {
+            double valor = transacao.getValor();
+            if (valor < 0) {
+                despesas = despesas + Math.abs(valor);
+            }
+        }
+
+        Double saldo = renda - despesas;
+        txt_renda.setText(String.format("%.2f", renda));
+        txt_despesas.setText(String.format(" %.2f", despesas));
+        txt_saldo.setText(String.format(" %.2f", saldo));
+    }
+
+
 }
