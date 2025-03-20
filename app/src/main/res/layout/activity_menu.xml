@@ -227,7 +227,8 @@
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fundoCurvado3"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintVertical_bias="0.166"
+        tools:listitem="@layout/recycler_view_transacao" />
 
     <Button
         android:id="@+id/btn_add_transacao"

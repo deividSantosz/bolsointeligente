@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -76,7 +75,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_valor_inicial" />
 
-
         <Spinner
             android:id="@+id/sp_tipo_investimento"
             android:layout_width="match_parent"
@@ -111,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="96dp"
             android:background="@color/white"
             app:itemIconTint="@color/black"
             app:itemRippleColor="@color/primaria"
@@ -121,15 +119,13 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_resultado"
-            app:menu="@menu/bottom_nav_menu">
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/bottom_nav_menu" />
 
         <TextView
             android:id="@+id/tv_resultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:fontFamily="@font/poppinsbold"
             android:padding="10dp"
             android:text="Resultado: "
@@ -140,22 +136,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_simular" />
 
-        <TextView
-            android:id="@+id/txt_Investir"
-            android:layout_width="wrap_content"
+        <!-- Ajuste aqui, remove o MaterialCardView e coloca os TextViews diretamente -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsbold"
-            android:text="Quer aprender a investir? Clique aqui!"
-            android:textColor="@color/primaria"
-            android:textSize="18sp"
-            android:padding="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintTop_toBottomOf="@id/tv_resultado"
+            android:layout_marginTop="36dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_resultado">
 
+            <TextView
+                android:id="@+id/txt_Investir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Quer aprender a investir?"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-
+            <TextView
+                android:id="@+id/txt_cliqueaqui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppinsbold"
+                android:paddingStart="8dp"
+                android:text="Clique aqui!"
+                android:textColor="@color/primaria"
+                android:textSize="18sp" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
