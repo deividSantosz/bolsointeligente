@@ -1,46 +1,83 @@
 package com.example.bolsointeligente.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bolsointeligente.R;
-import com.example.bolsointeligente.activities.dicas_investimentos.DicasInvestimentosAdapter;
+import com.example.bolsointeligente.activities.DicasInvestimentos.DicasInvestimentosAdapter;
+import com.example.bolsointeligente.activities.Acoes.AcaoAdapter;
+import com.example.bolsointeligente.activities.RendaFixa.RendaFixaAdapter;
+import com.example.bolsointeligente.database.Acao;
 import com.example.bolsointeligente.database.DicaInvestimento;
+import com.example.bolsointeligente.database.RendaFixa;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InvestimentosActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    private RecyclerView recyclerView;
+    private TextView  txtCliqueAqui;
+    private RecyclerView recylerViewDica, recyclerViewAcao, recyclerViewRendaFixa;
     private DicasInvestimentosAdapter dicaAdapter;
-    private List<DicaInvestimento> listaDicas;
+    private AcaoAdapter acaoAdapter;
+    private RendaFixaAdapter rendaFixaAdapter;
+    private TabLayout tabLayout;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investimentos);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        recyclerView = findViewById(R.id.recyclerDicas);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        listaDicas = new ArrayList<>();
-        listaDicas.add(new DicaInvestimento("Diversificação de Carteira", "Distribua seus investimentos..."));
-        listaDicas.add(new DicaInvestimento("Investimentos de Longo Prazo", "O poder dos juros compostos..."));
-        listaDicas.add(new DicaInvestimento("Renda Fixa vs. Variável", "Entenda as diferenças..."));
+        txtCliqueAqui = findViewById(R.id.txt_cliqueaqui);
+        tabLayout = findViewById(R.id.tabLayout);
 
-        dicaAdapter = new DicasInvestimentosAdapter(listaDicas);
-        recyclerView.setAdapter(dicaAdapter);
+        recyclerViewAcao = findViewById(R.id.recycleviewAcao);
+        recylerViewDica = findViewById(R.id.recyclerDicas);
+        recyclerViewRendaFixa = findViewById(R.id.recyclerViewRendaFixa);
+        recylerViewDica.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewAcao.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewRendaFixa.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewRendaFixa.setVisibility(View.GONE);
+        dicaAdapter = new DicasInvestimentosAdapter(ListaDicas());
+        recylerViewDica.setAdapter(dicaAdapter);
+
+        acaoAdapter = new AcaoAdapter(ListaAcoes());
+        recyclerViewAcao.setAdapter(acaoAdapter);
+
+        rendaFixaAdapter = new RendaFixaAdapter(ListaRendaFixa());
+        recyclerViewRendaFixa.setAdapter(rendaFixaAdapter);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    recyclerViewAcao.setVisibility(View.VISIBLE);
+                    recyclerViewRendaFixa.setVisibility(View.GONE);
+                } else if (tab.getPosition() == 1) {
+                    // Aba de Renda Fixa
+                    recyclerViewAcao.setVisibility(View.GONE);
+                    recyclerViewRendaFixa.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,5 +114,39 @@ public class InvestimentosActivity extends AppCompatActivity {
             }
 
         });
+
+        txtCliqueAqui.setOnClickListener((View view ) -> {
+            Intent intent = new Intent(InvestimentosActivity.this, SimulacaoActivity.class);
+            startActivity(intent);
+            finish();
+
+        });
+    }
+
+    private List<DicaInvestimento> ListaDicas() {
+        List<DicaInvestimento> listaDicas;
+        listaDicas = new ArrayList<>();
+        listaDicas.add(new DicaInvestimento("Diversificação de Carteira", "Distribua seus investimentos...", RendaFixaVariavel.class));
+        listaDicas.add(new DicaInvestimento("Investimentos de Longo Prazo", "O poder dos juros compostos...",  RendaFixaVariavel.class));
+        listaDicas.add(new DicaInvestimento("Renda Fixa vs. Variável", "Entenda as diferenças...",  RendaFixaVariavel.class));
+
+        return listaDicas;
+    }
+    private List<Acao> ListaAcoes() {
+        List<Acao> listaAcoes;
+        listaAcoes = new ArrayList<>();
+        listaAcoes.add(new Acao("PETR4", "Petrobras", "R$ 36,75", "+2,4%"));
+        listaAcoes.add(new Acao("VALE3", "Vale", "68,42", "-1,2%"));
+        listaAcoes.add(new Acao("ITUB4", "Itaú Unibanco", "32,18", "+0,8%"));
+        return listaAcoes;
+    }
+
+    private List<RendaFixa> ListaRendaFixa() {
+        List<RendaFixa> RendaFixaList;
+        RendaFixaList = new ArrayList<>();
+        RendaFixaList.add(new RendaFixa("Tesouro Selic", "2026", 12.75, "a.a.", "Liquidez diária"));
+        RendaFixaList.add(new RendaFixa("CDB Banco XYZ", "2 anos", 13.5, "a.a.", "110% do CDI"));
+
+        return RendaFixaList;
     }
 }

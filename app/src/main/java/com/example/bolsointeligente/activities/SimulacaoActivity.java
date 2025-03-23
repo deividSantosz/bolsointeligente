@@ -36,7 +36,7 @@ public class SimulacaoActivity extends AppCompatActivity {
     private Spinner spTipoInvestimento;
     private Button btnSimular;
     private LineChart chartProjecao;
-    private TextView tvResultado, txtInvestir;
+    private TextView tvResultado, txtCliqueAqui;
     BottomNavigationView bottomNavigationView;
     Map<String, Double> taxas = new HashMap<>();
 
@@ -54,7 +54,7 @@ public class SimulacaoActivity extends AppCompatActivity {
         chartProjecao = findViewById(R.id.chart_projecao);
         tvResultado = findViewById(R.id.tv_resultado);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        txtInvestir = findViewById(R.id.txt_Investir);
+        txtCliqueAqui = findViewById(R.id.txt_cliqueaqui);
 
 
         String[] tiposInvestimento = {"Escolha a categoria de investimento", "Poupança", "CDB", "Ações"};
@@ -73,10 +73,10 @@ public class SimulacaoActivity extends AppCompatActivity {
             }
         });
 
-        txtInvestir.setOnClickListener((View view ) -> {
+        txtCliqueAqui.setOnClickListener((View view ) -> {
             Intent intent = new Intent(SimulacaoActivity.this, InvestimentosActivity.class);
             startActivity(intent);
-
+            finish();
         });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -92,7 +92,7 @@
             android:id="@+id/btn_simular"
             android:layout_width="256dp"
             android:layout_height="59dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/primaria"
             android:text="Simular"
             android:textColorHighlight="@color/primaria"
@@ -100,7 +100,6 @@
             android:textSize="25sp"
             app:cornerRadius="13sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sp_tipo_investimento" />
 

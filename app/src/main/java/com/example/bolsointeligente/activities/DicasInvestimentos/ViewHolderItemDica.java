@@ -1,4 +1,4 @@
-package com.example.bolsointeligente.activities.dicas_investimentos;
+package com.example.bolsointeligente.activities.DicasInvestimentos;
 
 import android.view.View;
 import android.widget.TextView;
