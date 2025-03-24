@@ -108,8 +108,6 @@ public class SimulacaoActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void configurarGrafico() {
         chartProjecao.getDescription().setEnabled(false);
         chartProjecao.setTouchEnabled(true);

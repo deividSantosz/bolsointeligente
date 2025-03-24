@@ -124,21 +124,24 @@ private void carregarTransacoes() {
     }
     private void atualizarDadosFinanceiros() {
         List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
-        Double renda =  db.usuarioDao().getUserRenda(usuarioId);
+        Double renda = db.usuarioDao().getUserRenda(usuarioId);
 
         Double despesas = 0.0;
+        Double entradas = 0.0;
         for (Transacao transacao : transacoes) {
             double valor = transacao.getValor();
             if (valor < 0) {
-                despesas = despesas + Math.abs(valor);
+                despesas += Math.abs(valor);
+            } else if (valor > 0) {
+                entradas += valor;
             }
         }
-
-        Double saldo = renda - despesas;
+        Double saldo = renda + entradas - despesas;
         txt_renda.setText(String.format("%.2f", renda));
-        txt_despesas.setText(String.format(" %.2f", despesas));
-        txt_saldo.setText(String.format(" %.2f", saldo));
+        txt_despesas.setText(String.format("%.2f", despesas));
+        txt_saldo.setText(String.format("%.2f", saldo));
     }
+
 
 
 }
