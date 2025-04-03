@@ -125,6 +125,9 @@ private void carregarTransacoes() {
     private void atualizarDadosFinanceiros() {
         List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
         Double renda = db.usuarioDao().getUserRenda(usuarioId);
+        if (renda == null) {
+            renda = 0.0;
+        }
 
         Double despesas = 0.0;
         Double entradas = 0.0;

@@ -75,6 +75,17 @@ public class AdicionarTransacao extends Fragment {
         transacaoDao = db.transacaoDao();
 
 
+        //pegando os dados em caso de edição
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            int transacaoId = bundle.getInt("transacaoId", -1);
+            if (transacaoId != -1) {
+                carregarTransacao(transacaoId);
+                btnAddTransaction.setText("Editar");
+            }
+        }
+
+
         // Lista de categorias para o AutoCompleteTextView
         String[] categorias = {"Alimentação", "Transporte", "Lazer", "Saúde", "Outros", "Animal", "Beleza", "Educação", "Investimentos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, categorias);
@@ -134,19 +145,49 @@ public class AdicionarTransacao extends Fragment {
 
         double valor = Double.parseDouble(valorTexto);
         if (isSaida) {
-            valor = -valor; // Se for uma saída, transforma o valor em negativo
+            valor = -valor;
         }
-        long data = calendario.getTimeInMillis(); // Converte a data para timestamp
+        long data = calendario.getTimeInMillis();
+
+        // Verificar se estamos editando ou adicionando
+        Bundle bundle = getActivity().getIntent().getExtras();
+        int transacaoId = bundle != null ? bundle.getInt("transacaoId", -1) : -1;
 
         Transacao transacao = new Transacao();
         transacao.setDescricao(descricao);
         transacao.setValor(valor);
         transacao.setCategoria(categoria);
         transacao.setData(data);
-        transacao.setIdUsuario(usuarioId); // Relaciona ao usuário
+        transacao.setIdUsuario(usuarioId);
 
-        // Salvar no banco
-        transacaoDao.inserirTransacao(transacao);
-        Toast.makeText(getContext(), "Transação adicionada com sucesso!", Toast.LENGTH_SHORT).show();
+        if (transacaoId != -1) {
+            // Edição de transação existente
+            transacao.setId(transacaoId);
+            transacaoDao.atualizarTransacao(transacao);
+            Toast.makeText(getContext(), "Transação atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+        } else {
+            // Nova transação
+            transacaoDao.inserirTransacao(transacao);
+            Toast.makeText(getContext(), "Transação adicionada com sucesso!", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    private void carregarTransacao(int transacaoId) {
+        Transacao transacao = transacaoDao.getTransacaoById(transacaoId);
+        if (transacao != null) {
+            editDescricao.setText(transacao.getDescricao());
+            editValor.setText(String.valueOf(Math.abs(transacao.getValor())));
+            autoCompleteCategory.setText(transacao.getCategoria());
+
+            // Formata a data para exibição
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            editDate.setText(formato.format(transacao.getData()));
+
+            // Seleciona a tab correta (entrada/saída)
+            isSaida = transacao.getValor() < 0;
+            tabLayout.getTabAt(isSaida ? 1 : 0).select();
+        }
+    }
+
+
 }
