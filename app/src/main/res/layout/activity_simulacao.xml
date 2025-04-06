@@ -49,66 +49,71 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/et_valor_inicial"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_dados_simulacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="484dp"
-            android:hint="Valor Inicial (R$)"
-            android:inputType="numberDecimal"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginHorizontal="16dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <EditText
-            android:id="@+id/et_tempo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Tempo (anos)"
-            android:inputType="number"
-            android:padding="10dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_valor_inicial" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/sp_tipo_investimento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:autofillHints="Escolha a categoria de investimento"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_tempo" />
+                <EditText
+                    android:id="@+id/et_valor_inicial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Valor Inicial (R$)"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp" />
 
-        <Button
-            android:id="@+id/btn_simular"
-            android:layout_width="256dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/primaria"
-            android:text="Simular"
-            android:textColorHighlight="@color/primaria"
-            android:textColorLink="@color/primaria"
-            android:textSize="25sp"
-            app:cornerRadius="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sp_tipo_investimento" />
+                <EditText
+                    android:id="@+id/et_tempo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Tempo (anos)"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
 
+                <Spinner
+                    android:id="@+id/sp_tipo_investimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:autofillHints="Escolha a categoria de investimento"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_simular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/primaria"
+                    android:text="Simular"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Ajuste aqui, remove o MaterialCardView e coloca os TextViews diretamente -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="240dp"
             android:background="@color/white"
             app:itemIconTint="@color/black"
             app:itemRippleColor="@color/primaria"
@@ -124,22 +129,22 @@
             android:id="@+id/tv_resultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/poppinsbold"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/poppinsmedium"
             android:padding="10dp"
-            android:text="Resultado: "
-            android:textColor="@color/primaria"
+            android:text="Com base na simulação que você fez, esse será os seus resultados ao final do tempo simulado:"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_simular" />
+            app:layout_constraintTop_toBottomOf="@+id/card_dados_simulacao" />
 
-        <!-- Ajuste aqui, remove o MaterialCardView e coloca os TextViews diretamente -->
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="156dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -170,5 +175,19 @@
                 android:textColor="@color/primaria"
                 android:textSize="18sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_valorfinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:text="VALOR FINAL"
+            android:textColor="@color/primaria"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_resultado"
+            app:layout_constraintVertical_bias="0.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -36,7 +36,7 @@ public class SimulacaoActivity extends AppCompatActivity {
     private Spinner spTipoInvestimento;
     private Button btnSimular;
     private LineChart chartProjecao;
-    private TextView tvResultado, txtCliqueAqui;
+    private TextView tvResultado, txtCliqueAqui, txtvalorfinal;
     BottomNavigationView bottomNavigationView;
     Map<String, Double> taxas = new HashMap<>();
 
@@ -55,6 +55,9 @@ public class SimulacaoActivity extends AppCompatActivity {
         tvResultado = findViewById(R.id.tv_resultado);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         txtCliqueAqui = findViewById(R.id.txt_cliqueaqui);
+        txtvalorfinal = findViewById(R.id.txt_valorfinal);
+        tvResultado.setVisibility(View.GONE);
+        txtvalorfinal.setVisibility(View.GONE);
 
 
         String[] tiposInvestimento = {"Escolha a categoria de investimento", "Poupança", "CDB", "Ações"};
@@ -125,7 +128,7 @@ public class SimulacaoActivity extends AppCompatActivity {
 
         // Criar dados padrão (zeros)
         List<Entry> entradasIniciais = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) { // Exemplo: 5 anos com valor inicial 0
+        for (int i = 1; i <= 5; i++) {
             entradasIniciais.add(new Entry(i, 0));
         }
 
@@ -187,8 +190,12 @@ public class SimulacaoActivity extends AppCompatActivity {
         chartProjecao.invalidate(); // Atualizar o gráfico
 
         // Exibir o resultado final
-        tvResultado.setText(String.format("Resultado final: R$ %.2f", valorFinal));
-        tvResultado.setTextSize(20);
+        txtvalorfinal.setText(String.format("Valor final: R$ %.2f", valorFinal));
+        txtvalorfinal.setTextSize(20);
+
+        tvResultado.setVisibility(View.VISIBLE);
+        txtvalorfinal.setVisibility(View.VISIBLE);
+
     }
 
 
