@@ -6,18 +6,17 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#FFFFFF"
-    tools:context=".activities.InvestimentosLongoPrazo">
+    tools:context=".activities.DiversificacaoCarteira">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.example.bolsointeligente.view.FundoCurvado
-            android:id="@+id/fundoCurvado3"
+            android:id="@+id/fundoCurvado4"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,14 +27,14 @@
             android:layout_marginTop="48dp"
             android:fontFamily="@font/poppinsbold"
             android:padding="16dp"
-            android:text="Investimentos de Longo Prazo"
+            android:text="Diversificação de Carteira"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <!-- Card: O que é -->
         <androidx.cardview.widget.CardView
@@ -71,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
                     android:lineSpacingExtra="4dp"
-                    android:text="Investimentos de longo prazo são aplicações financeiras com foco em crescimento ao longo dos anos. São ideais para objetivos como aposentadoria, compra de imóvel ou construção de patrimônio." />
+                    android:text="Diversificação de carteira é a prática de distribuir seus investimentos entre diferentes ativos, setores e tipos de investimento, com o objetivo de reduzir os riscos e melhorar o desempenho geral." />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -109,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
                     android:lineSpacingExtra="4dp"
-                    android:text="Você investe recursos regularmente ou em um único aporte e deixa seu dinheiro render ao longo do tempo. Com a ação dos juros compostos e o tempo, o valor investido tende a crescer significativamente." />
+                    android:text="Ao diversificar, você evita concentrar todo seu dinheiro em um único tipo de investimento. Assim, se um setor ou ativo tiver desempenho ruim, os outros podem compensar as perdas, mantendo sua carteira equilibrada." />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -146,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
                     android:lineSpacingExtra="4dp"
-                    android:text="• Potencial de maior rentabilidade com o tempo\n• Benefício dos juros compostos\n• Ideal para alcançar grandes objetivos financeiros\n• Menor impacto de variações do mercado no longo prazo" />
+                    android:text="• Redução de riscos\n• Proteção contra volatilidade de um único setor\n• Melhoria na estabilidade da carteira\n• Maior potencial de retorno a longo prazo" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -184,12 +183,12 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
                     android:lineSpacingExtra="4dp"
-                    android:text="• Necessidade de paciência e disciplina\n• Baixa liquidez (em alguns ativos)\n• Exposição a oscilações de mercado no curto prazo" />
+                    android:text="• Pode dificultar o acompanhamento dos ativos\n• Exige conhecimento e planejamento\n• Possível diluição de retornos em excesso" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/seta_longo_prazo"
+            android:id="@+id/img_diversificacao"
             android:layout_width="47dp"
             android:layout_height="37dp"
             android:layout_marginTop="16dp"
