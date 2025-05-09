@@ -60,13 +60,12 @@ public class SimulacaoActivity extends AppCompatActivity {
         txtvalorfinal.setVisibility(View.GONE);
 
 
-        String[] tiposInvestimento = {"Escolha a categoria de investimento", "Poupança", "CDB", "Ações"};
+        String[] tiposInvestimento = {"Escolha a categoria de investimento", "Poupança", "CDB"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tiposInvestimento);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTipoInvestimento.setAdapter(adapter);
-        taxas.put("Poupança", 5.0); // 5% ao ano
-        taxas.put("CDB", 8.0); // 8% ao ano
-        taxas.put("Ações", 15.0); // 15% ao ano
+        taxas.put("Poupança", 6.17); // Taxa real de poupança em 2025 (~6.17% a.a.)
+        taxas.put("CDB", 12.0);      // Média estimada de CDB pré-fixado em 2025 (~12% a.a.)
 
         configurarGrafico();
         btnSimular.setOnClickListener(new View.OnClickListener() {

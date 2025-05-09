@@ -42,6 +42,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.7")
     implementation("androidx.activity:activity:1.8.0")
     val room_version = "2.6.1"
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0" )
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     annotationProcessor("androidx.room:room-compiler:$room_version")

@@ -125,7 +125,12 @@ public class AdicionarTransacao extends Fragment {
                     calendario.set(Calendar.YEAR, year);
                     calendario.set(Calendar.MONTH, month);
                     calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
+                    Calendar dataSelecionada = Calendar.getInstance();
+                    dataSelecionada.set(year, month, dayOfMonth);
+                    if (dataSelecionada.after(Calendar.getInstance())) {
+                        Toast.makeText(getContext(), "A data não pode ser no futuro!", Toast.LENGTH_SHORT).show();
+                        calendario.setTimeInMillis(System.currentTimeMillis());
+                    }
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     editDate.setText(formato.format(calendario.getTime()));
                 },

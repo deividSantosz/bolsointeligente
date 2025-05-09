@@ -1,130 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="false"
     tools:context=".activities.CadastroActivity">
 
-    <com.example.bolsointeligente.view.FundoCurvado
-        android:id="@+id/fundoCurvado"
-        android:layout_width="414dp"
-        android:layout_height="226dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crie sua conta"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057" />
+        android:background="#FFFFFF"
+        android:padding="0dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="314dp"
-        android:layout_height="217dp"
-        android:layout_marginTop="88dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fancyai_1736810958405" />
+        <com.example.bolsointeligente.view.FundoCurvado
+            android:id="@+id/fundoCurvado"
+            android:layout_width="414dp"
+            android:layout_height="226dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/editNome"
-        android:layout_width="349dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Nome"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crie sua conta"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.057" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="314dp"
+            android:layout_height="217dp"
+            android:layout_marginTop="88dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/fancyai_1736810958405" />
+
+        <EditText
+            android:id="@+id/editNome"
+            android:layout_width="349dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.063" />
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="349dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editNome"
+            app:layout_constraintVertical_bias="0.059" />
 
 
-    <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="349dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.541" />
+        <EditText
+            android:id="@+id/editTelefone"
+            android:layout_width="349dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Telefone"
+            android:inputType="phone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_senha_cadastro"
+            app:layout_constraintVertical_bias="0.061" />
 
-    <EditText
-        android:id="@+id/editTelefone"
-        android:layout_width="349dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Telefone"
-        android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.722" />
+        <EditText
+            android:id="@+id/editRenda"
+            android:layout_width="349dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="48dp"
+            android:ems="10"
+            android:hint="Renda"
+            android:inputType="number|numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTelefone" />
 
-    <EditText
-        android:id="@+id/editRenda"
-        android:layout_width="349dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Renda"
-        android:inputType="number|numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.806" />
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="233dp"
+            android:layout_height="73dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="132dp"
+            android:backgroundTint="@color/primaria"
+            android:text="Cadastrar"
+            android:textColorHighlight="@color/primaria"
+            android:textColorLink="@color/primaria"
+            android:textSize="40sp"
+            app:cornerRadius="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.44"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editRenda"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/btnCadastrar"
-        android:layout_width="233dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="@color/primaria"
-        android:text="Cadastrar"
-        android:textColorHighlight="@color/primaria"
-        android:textColorLink="@color/primaria"
-        android:textSize="40sp"
-        app:cornerRadius="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/btnJaTenhoConta"
+            android:layout_width="233dp"
+            android:layout_height="73dp"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@color/primaria"
+            android:text="Login"
+            android:textColorHighlight="@color/primaria"
+            android:textColorLink="@color/primaria"
+            android:textSize="40sp"
+            app:cornerRadius="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.438"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCadastrar"
+            app:layout_constraintVertical_bias="0.903" />
 
-    <EditText
-        android:id="@+id/edit_senha_cadastro"
-        android:layout_width="349dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        <EditText
+            android:id="@+id/edit_senha_cadastro"
+            android:layout_width="349dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editEmail"
+            app:layout_constraintVertical_bias="0.056" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

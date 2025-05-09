@@ -18,7 +18,7 @@ import com.example.bolsointeligente.database.Usuario;
 public class CadastroActivity extends AppCompatActivity {
 
     EditText editNome, editEmail, editSenha, editTelefone, editRenda;
-    Button btnCadastrar;
+    Button btnCadastrar, btnJaTenhoConta;
     String rendaString;
     Double renda = 0.0;
     Database db;
@@ -37,11 +37,17 @@ public class CadastroActivity extends AppCompatActivity {
         editSenha = findViewById(R.id.edit_senha_cadastro);
         editRenda = findViewById(R.id.editRenda);
         btnCadastrar = findViewById(R.id.btnCadastrar);
+        btnJaTenhoConta = findViewById(R.id.btnJaTenhoConta);
 
         btnCadastrar.setOnClickListener((View view ) -> {
             cadastro();
         });
+        btnJaTenhoConta.setOnClickListener((View view ) -> {
+            Intent intent = new Intent(CadastroActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
     }
+
 
     public void cadastro() {
         if(validarCampos() == false) {

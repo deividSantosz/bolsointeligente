@@ -3,6 +3,7 @@ package com.example.bolsointeligente.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -16,14 +17,23 @@ import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.activities.DicasInvestimentos.DicasInvestimentosAdapter;
 import com.example.bolsointeligente.activities.Acoes.AcaoAdapter;
 import com.example.bolsointeligente.activities.RendaFixa.RendaFixaAdapter;
+import com.example.bolsointeligente.api.CotacaoResponse;
 import com.example.bolsointeligente.database.Acao;
 import com.example.bolsointeligente.database.DicaInvestimento;
 import com.example.bolsointeligente.database.RendaFixa;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.example.bolsointeligente.api.AcaoApiService;
+import com.example.bolsointeligente.api.RetrofitClient;
+import com.example.bolsointeligente.database.CotacaoAcaoResponse;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class InvestimentosActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -53,8 +63,14 @@ public class InvestimentosActivity extends AppCompatActivity {
         dicaAdapter = new DicasInvestimentosAdapter(ListaDicas());
         recylerViewDica.setAdapter(dicaAdapter);
 
-        acaoAdapter = new AcaoAdapter(ListaAcoes());
+        List<Acao> listaAcoes = new ArrayList<>();
+        acaoAdapter = new AcaoAdapter(listaAcoes);
         recyclerViewAcao.setAdapter(acaoAdapter);
+
+        buscarCotacao("PETR4", listaAcoes);
+        buscarCotacao("VALE3", listaAcoes);
+        buscarCotacao("ITUB4", listaAcoes);
+
 
         rendaFixaAdapter = new RendaFixaAdapter(ListaRendaFixa());
         recyclerViewRendaFixa.setAdapter(rendaFixaAdapter);
@@ -93,11 +109,6 @@ public class InvestimentosActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
-                if (item.getItemId() == R.id.Transacoes) {
-                    Intent intent = new Intent(InvestimentosActivity.this, TransacoesActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
 
                 if (item.getItemId() == R.id.estatisticas) {
                     Intent intent = new Intent(InvestimentosActivity.this, EstatisticasActivity.class);
@@ -132,15 +143,6 @@ public class InvestimentosActivity extends AppCompatActivity {
 
         return listaDicas;
     }
-    private List<Acao> ListaAcoes() {
-        List<Acao> listaAcoes;
-        listaAcoes = new ArrayList<>();
-        listaAcoes.add(new Acao("PETR4", "Petrobras", "R$ 36,75", "+2,4%"));
-        listaAcoes.add(new Acao("VALE3", "Vale", "68,42", "-1,2%"));
-        listaAcoes.add(new Acao("ITUB4", "Itaú Unibanco", "32,18", "+0,8%"));
-        return listaAcoes;
-    }
-
     private List<RendaFixa> ListaRendaFixa() {
         List<RendaFixa> RendaFixaList;
         RendaFixaList = new ArrayList<>();
@@ -149,4 +151,51 @@ public class InvestimentosActivity extends AppCompatActivity {
 
         return RendaFixaList;
     }
+
+    private void buscarCotacao(String symbol, List<Acao> listaAcoes) {
+        String token = "n19XAYTLiKQZXjNSXeqkow";
+        AcaoApiService apiService = RetrofitClient.getApiService();
+        Call<CotacaoResponse> call = apiService.getCotacao(symbol, token);
+
+        call.enqueue(new Callback<CotacaoResponse>() {
+            @Override
+            public void onResponse(Call<CotacaoResponse> call, Response<CotacaoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Acessando os resultados dentro da resposta
+                    CotacaoResponse cotacaoResponse = response.body();
+                    List<CotacaoAcaoResponse> cotacoes = cotacaoResponse.getResults();
+
+                    // Garantir que a lista não está vazia
+                    if (!cotacoes.isEmpty()) {
+                        CotacaoAcaoResponse cotacao = cotacoes.get(0); // Pegando o primeiro item da lista
+
+                        Log.d("API Response", "Cotação recebida: " + cotacao.toString());
+                        String preco = String.format("%.2f", cotacao.getRegularMarketPrice());
+                        String variacao = String.format("%.2f%%", cotacao.getChangePercent());
+
+                        // Atualizando a lista de ações
+                        listaAcoes.add(new Acao(
+                                cotacao.getSymbol(),
+                                cotacao.getNome(),
+                                preco,
+                                variacao
+                        ));
+
+                        // Notifica o adaptador sobre a atualização
+                        acaoAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    Log.e("API Error", "Código de erro HTTP: " + response.code());
+                    Log.e("API Error", "Mensagem de erro: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CotacaoResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+
 }

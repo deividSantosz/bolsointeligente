@@ -7,14 +7,10 @@
         android:id="@+id/estatisticas"
         android:icon="@drawable/bar"
         android:title="Estatisticas" />
-    <item
-        android:id="@+id/Transacoes"
-        android:icon="@drawable/wallet"
-        android:title="Transações" />
 
     <item
         android:id="@+id/simulador"
-        android:icon="@drawable/simulador"
+        android:icon="@drawable/wallet"
         android:title="Investimentos" />
     <item
         android:id="@+id/perfil"

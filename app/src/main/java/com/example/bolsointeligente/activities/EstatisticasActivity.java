@@ -73,11 +73,6 @@ public class EstatisticasActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
-                if (item.getItemId() == R.id.Transacoes) {
-                    Intent intent = new Intent(EstatisticasActivity.this, TransacoesActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
                 if (item.getItemId() == R.id.estatisticas) {
                     Intent intent = new Intent(EstatisticasActivity.this, MenuActivity.class);
                     startActivity(intent);
