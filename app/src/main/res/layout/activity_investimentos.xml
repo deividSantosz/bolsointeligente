@@ -168,7 +168,7 @@
         app:layout_constraintVertical_bias="0.511" />
 
     <TextView
-        android:id="@+id/txt_cliqueaqui"
+        android:id="@+id/txt_clique"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

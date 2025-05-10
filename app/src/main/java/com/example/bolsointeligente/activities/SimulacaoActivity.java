@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,7 +53,7 @@ public class SimulacaoActivity extends AppCompatActivity {
         chartProjecao = findViewById(R.id.chart_projecao);
         tvResultado = findViewById(R.id.tv_resultado);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        txtCliqueAqui = findViewById(R.id.txt_cliqueaqui);
+        txtCliqueAqui = findViewById(R.id.txt_clique);
         txtvalorfinal = findViewById(R.id.txt_valorfinal);
         tvResultado.setVisibility(View.GONE);
         txtvalorfinal.setVisibility(View.GONE);
@@ -84,8 +83,8 @@ public class SimulacaoActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(SimulacaoActivity.this, PerfilActivity.class);
+                if (item.getItemId() == R.id.home) {
+                    Intent intent = new Intent(SimulacaoActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
                 }
@@ -94,13 +93,13 @@ public class SimulacaoActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
-                else if (item.getItemId() == R.id.home) {
-                    Intent intent = new Intent(SimulacaoActivity.this, MenuActivity.class);
+                else if (item.getItemId() == R.id.comecandoinvestir) {
+                    Intent intent = new Intent(SimulacaoActivity.this, ComecandoInvestir.class);
                     startActivity(intent);
                     return true;
                 }
-                else if (item.getItemId() == R.id.simulador) {
-                    Intent intent = new Intent(SimulacaoActivity.this, SimulacaoActivity.class);
+                else if (item.getItemId() == R.id.perfil) {
+                    Intent intent = new Intent(SimulacaoActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }

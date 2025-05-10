@@ -1,0 +1,16 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Fundo branco com cantos arredondados -->
+    <solid android:color="#FFFFFF" />
+
+    <!-- Borda cinza clara -->
+    <stroke
+        android:width="1dp"
+        android:color="#DDDDDD" />
+
+    <!-- Cantos arredondados -->
+    <corners android:radius="12dp" />
+
+    <!-- Sombras reais só funcionam bem a partir do elevation -->
+</shape>

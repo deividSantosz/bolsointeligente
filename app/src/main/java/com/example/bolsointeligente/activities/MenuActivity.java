@@ -71,11 +71,7 @@ public class MenuActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(MenuActivity.this, PerfilActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
+
                 if (item.getItemId() == R.id.estatisticas) {
                     Intent intent = new Intent(MenuActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
@@ -84,6 +80,16 @@ public class MenuActivity extends AppCompatActivity {
 
                 if (item.getItemId() == R.id.simulador) {
                     Intent intent = new Intent(MenuActivity.this, SimulacaoActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                if (item.getItemId() == R.id.comecandoinvestir) {
+                    Intent intent = new Intent(MenuActivity.this, ComecandoInvestir.class);
+                    startActivity(intent);
+                    return true;
+                }
+                if (item.getItemId() == R.id.perfil) {
+                    Intent intent = new Intent(MenuActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }

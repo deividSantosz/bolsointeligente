@@ -11,7 +11,12 @@
     <item
         android:id="@+id/simulador"
         android:icon="@drawable/wallet"
-        android:title="Investimentos" />
+        android:title="Simular Investimentos" />
+
+    <item
+        android:id="@+id/comecandoinvestir"
+        android:icon="@drawable/investimetos"
+        android:title="Aprenda a investir" />
     <item
         android:id="@+id/perfil"
         android:icon="@drawable/user"

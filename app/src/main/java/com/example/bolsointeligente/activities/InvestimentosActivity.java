@@ -50,7 +50,7 @@ public class InvestimentosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investimentos);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        txtCliqueAqui = findViewById(R.id.txt_cliqueaqui);
+        txtCliqueAqui = findViewById(R.id.txt_clique);
         tabLayout = findViewById(R.id.tabLayout);
 
         recyclerViewAcao = findViewById(R.id.recycleviewAcao);
@@ -104,12 +104,13 @@ public class InvestimentosActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
-                if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(InvestimentosActivity.this, PerfilActivity.class);
+
+
+                if (item.getItemId() == R.id.comecandoinvestir) {
+                    Intent intent = new Intent(InvestimentosActivity.this, ComecandoInvestir.class);
                     startActivity(intent);
                     return true;
                 }
-
                 if (item.getItemId() == R.id.estatisticas) {
                     Intent intent = new Intent(InvestimentosActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
@@ -118,6 +119,11 @@ public class InvestimentosActivity extends AppCompatActivity {
 
                 if (item.getItemId() == R.id.simulador) {
                     Intent intent = new Intent(InvestimentosActivity.this, SimulacaoActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                if (item.getItemId() == R.id.perfil) {
+                    Intent intent = new Intent(InvestimentosActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }
