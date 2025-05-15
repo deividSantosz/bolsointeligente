@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BolsoInteligente"
         tools:targetApi="31">
         <activity
+            android:name=".activities.FundosImobiliariosActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ComecandoInvestir"
             android:exported="false" />
         <activity
@@ -48,7 +51,7 @@
             android:name=".activities.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".PerfilActivity"
+            android:name=".activities.PerfilActivityvity"
             android:exported="false"
             android:label="@string/title_activity_perfil"
             android:theme="@style/Theme.BolsoInteligente" />

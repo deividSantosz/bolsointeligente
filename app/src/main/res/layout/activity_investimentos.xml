@@ -11,182 +11,213 @@
     android:fadeScrollbars="false"
     tools:context=".activities.InvestimentosActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:padding="0dp">
-
-    <!-- Fundo curvado -->
-    <com.example.bolsointeligente.view.FundoCurvado
-        android:id="@+id/fundoCurvado3"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Título -->
-    <TextView
-        android:id="@+id/tvTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Aprenda a Investir"
-        android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Título da seção -->
-    <TextView
-        android:id="@+id/tvDestaques"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Dicas de Investimento"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fundoCurvado3"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
-
-    <!-- RecyclerView para exibir os cartões de dicas -->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDicas"
-        android:layout_width="407dp"
-        android:layout_height="441dp"
-        android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintTop_toBottomOf="@id/tvDestaques"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/recycler_view_item_dica" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemRippleColor="@color/primaria"
-        app:itemTextAppearanceActive="@color/primaria"
-        app:itemTextColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:background="#FFFFFF"
+        android:padding="0dp">
 
+        <!-- Fundo curvado -->
+        <com.example.bolsointeligente.view.FundoCurvado
+            android:id="@+id/fundoCurvado3"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_info_mercado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Informações de mercado"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerDicas" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#E7E7E7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_info_mercado"
-        app:tabIndicatorColor="@color/primaria"
-        app:tabSelectedTextColor="#000000"
-        app:tabTextAppearance="@style/CustomTabText"
-        app:tabTextColor="#888888">
-
-        <com.google.android.material.tabs.TabItem
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ações" />
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Aprenda a Investir"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.tabs.TabItem
+
+        <!-- RecyclerView para exibir os cartões de dicas -->
+
+        <TextView
+            android:id="@+id/tvDestaques"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Renda Fixa" />
-    </com.google.android.material.tabs.TabLayout>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="387dp"
-        android:layout_height="196dp"
-        android:layout_margin="16dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="6dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        app:layout_constraintVertical_bias="0.07">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Dicas de Investimentos"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fundoCurvado3" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleviewAcao"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/recyclerDicas"
+            android:layout_width="407dp"
+            android:layout_height="441dp"
             android:padding="8dp"
-            tools:listitem="@layout/recycler_view_item_acao" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+            app:layout_constraintTop_toBottomOf="@id/tvDestaques"
+            app:layout_constraintVertical_bias="0.01"
+            tools:layout_editor_absoluteX="10dp"
+            tools:listitem="@layout/recycler_view_item_dica" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:itemIconTint="@color/black"
+            app:itemRippleColor="@color/primaria"
+            app:itemTextAppearanceActive="@color/primaria"
+            app:itemTextColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
+
+
+        <TextView
+            android:id="@+id/txt_tipos_investimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Tipos de investimentos"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.076"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerDicas" />
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewRendaFixa"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/rv_tipo_investimento"
+            android:layout_width="407dp"
+            android:layout_height="441dp"
             android:padding="8dp"
-            tools:listitem="@layout/recycler_view_item_rendafixa" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/txt_Investir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/poppinsregular"
-        android:text="Quer simular um investimento?"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.511" />
-
-    <TextView
-        android:id="@+id/txt_clique"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/poppinsbold"
-        android:paddingStart="8dp"
-        android:text="Clique aqui!"
-        android:textColor="@color/primaria"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/txt_Investir"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.504" />
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.217"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_tipos_investimento"
+            tools:listitem="@layout/recycler_view_item_dica" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        <TextView
+            android:id="@+id/txt_info_mercado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Informações de mercado"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.153"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_tipo_investimento" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#E7E7E7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_info_mercado"
+            app:tabIndicatorColor="@color/primaria"
+            app:tabSelectedTextColor="#000000"
+            app:tabTextAppearance="@style/CustomTabText"
+            app:tabTextColor="#888888">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ações" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Renda Fixa" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.cardview.widget.CardView
+                 android:id="@+id/cardView"
+                 android:layout_width="387dp"
+                 android:layout_height="196dp"
+                 android:layout_margin="16dp"
+                 app:cardBackgroundColor="#FFFFFF"
+                 app:cardCornerRadius="20dp"
+                 app:cardElevation="6dp"
+                 app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                 app:layout_constraintVertical_bias="0.07">
+
+                 <androidx.recyclerview.widget.RecyclerView
+                     android:id="@+id/recycleviewAcao"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:padding="8dp"
+                     tools:listitem="@layout/recycler_view_item_acao" />
+
+                 <androidx.recyclerview.widget.RecyclerView
+                     android:id="@+id/recyclerViewRendaFixa"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:padding="8dp"
+                     tools:listitem="@layout/recycler_view_item_rendafixa" />
+             </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txt_Investir"
+            android:layout_width="257dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Quer simular um investimento?"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintVertical_bias="0.625" />
+
+        <TextView
+            android:id="@+id/txt_clique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppinsbold"
+            android:paddingStart="8dp"
+            android:text="Clique aqui!"
+            android:textColor="@color/primaria"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.181"
+            app:layout_constraintStart_toEndOf="@+id/txt_Investir"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintVertical_bias="0.564" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+         </ScrollView>

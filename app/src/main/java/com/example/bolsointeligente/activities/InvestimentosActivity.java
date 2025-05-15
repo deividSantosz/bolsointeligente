@@ -38,8 +38,9 @@ import retrofit2.Response;
 public class InvestimentosActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     private TextView  txtCliqueAqui;
-    private RecyclerView recylerViewDica, recyclerViewAcao, recyclerViewRendaFixa;
+    private RecyclerView recylerViewDica, recyclerViewAcao, recyclerViewRendaFixa, recyclerViewTiposInvestimento;
     private DicasInvestimentosAdapter dicaAdapter;
+    private DicasInvestimentosAdapter tiposInvestimentosAdapter;
     private AcaoAdapter acaoAdapter;
     private RendaFixaAdapter rendaFixaAdapter;
     private TabLayout tabLayout;
@@ -52,16 +53,23 @@ public class InvestimentosActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         txtCliqueAqui = findViewById(R.id.txt_clique);
         tabLayout = findViewById(R.id.tabLayout);
-
+        recyclerViewTiposInvestimento = findViewById(R.id.rv_tipo_investimento);
         recyclerViewAcao = findViewById(R.id.recycleviewAcao);
         recylerViewDica = findViewById(R.id.recyclerDicas);
         recyclerViewRendaFixa = findViewById(R.id.recyclerViewRendaFixa);
         recylerViewDica.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewAcao.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewTiposInvestimento.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewRendaFixa.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewRendaFixa.setVisibility(View.GONE);
+
+
         dicaAdapter = new DicasInvestimentosAdapter(ListaDicas());
         recylerViewDica.setAdapter(dicaAdapter);
+
+        tiposInvestimentosAdapter = new DicasInvestimentosAdapter(ListaTiposInvestimento());
+        recyclerViewTiposInvestimento.setAdapter(tiposInvestimentosAdapter);
+
 
         List<Acao> listaAcoes = new ArrayList<>();
         acaoAdapter = new AcaoAdapter(listaAcoes);
@@ -156,6 +164,16 @@ public class InvestimentosActivity extends AppCompatActivity {
         RendaFixaList.add(new RendaFixa("CDB Banco XYZ", "2 anos", 13.5, "a.a.", "110% do CDI"));
 
         return RendaFixaList;
+    }
+
+    private List<DicaInvestimento> ListaTiposInvestimento() {
+        List<DicaInvestimento> listaTiposInvestimentos;
+        listaTiposInvestimentos = new ArrayList<>();
+        listaTiposInvestimentos.add(new DicaInvestimento("Fundos Imobiliarios", "Aprenda o que são fundos imobiliarios.", FundosImobiliariosActivity.class));
+        listaTiposInvestimentos.add(new DicaInvestimento("Ações Brasileiras", "Entenda como funciona as ações no Brasil.",  FundosImobiliariosActivity.class));
+        listaTiposInvestimentos.add(new DicaInvestimento("Criptomoedas", "Saiba como investir na moeda do futuro.",  FundosImobiliariosActivity.class));
+
+        return listaTiposInvestimentos;
     }
 
     private void buscarCotacao(String symbol, List<Acao> listaAcoes) {
