@@ -10,7 +10,6 @@ import androidx.room.Room;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,6 @@ import com.example.bolsointeligente.fragments.AdicionarTransacao;
 import com.example.bolsointeligente.singleton.UsuarioSingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,11 +78,6 @@ public class MenuActivity extends AppCompatActivity {
 
                 if (item.getItemId() == R.id.simulador) {
                     Intent intent = new Intent(MenuActivity.this, SimulacaoActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                if (item.getItemId() == R.id.comecandoinvestir) {
-                    Intent intent = new Intent(MenuActivity.this, ComecandoInvestir.class);
                     startActivity(intent);
                     return true;
                 }

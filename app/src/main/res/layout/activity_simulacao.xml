@@ -140,31 +140,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_dados_simulacao" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="156dp"
-            android:orientation="horizontal"
+
+        <TextView
+            android:id="@+id/txt_Investir"
+            android:layout_width="279dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Quer saber porque investir faz você mudar de vida?"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.115"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_resultado">
+            app:layout_constraintTop_toBottomOf="@+id/txt_valorfinal"
+            app:layout_constraintVertical_bias="0.203" />
 
-            <TextView
-                android:id="@+id/txt_Investir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32sp"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/poppinsregular"
-                android:text="Quer aprender a investir?"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txt_clique"
+        <TextView
+                android:id="@+id/txt_clique_aqui_investimentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -174,20 +170,36 @@
                 android:text="Clique aqui!"
                 android:textColor="@color/primaria"
                 android:textSize="18sp" />
-        </LinearLayout>
+
 
         <TextView
             android:id="@+id/txt_valorfinal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/poppinsbold"
             android:text="VALOR FINAL"
             android:textColor="@color/primaria"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_resultado"
             app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/txt_clique_aqui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="96dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Clique aqui!"
+            android:textColor="@color/primaria"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toEndOf="@+id/txt_Investir"
+            app:layout_constraintTop_toBottomOf="@+id/txt_valorfinal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

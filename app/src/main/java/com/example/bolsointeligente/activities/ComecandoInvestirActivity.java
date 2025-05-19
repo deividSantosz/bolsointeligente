@@ -13,47 +13,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bolsointeligente.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-@SuppressLint("MissingInflatedId")
-public class ComecandoInvestir extends AppCompatActivity {
+public class ComecandoInvestirActivity extends AppCompatActivity {
     TextView txt_clique;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comecando_investir);
+        txt_clique = findViewById(R.id.txt_clique_aqui_investimentos);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        txt_clique = findViewById(R.id.txt_clique);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 if (item.getItemId() == R.id.home) {
-                    Intent intent = new Intent(ComecandoInvestir.this, MenuActivity.class);
+                    Intent intent = new Intent(ComecandoInvestirActivity.this, MenuActivity.class);
                     startActivity(intent);
-                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.estatisticas) {
+                    Intent intent = new Intent(ComecandoInvestirActivity.this, EstatisticasActivity.class);
+                    startActivity(intent);
                     return true;
                 }
 
-                if (item.getItemId() == R.id.estatisticas) {
-                    Intent intent = new Intent(ComecandoInvestir.this, EstatisticasActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                }
 
-                if (item.getItemId() == R.id.simulador) {
-                    Intent intent = new Intent(ComecandoInvestir.this, SimulacaoActivity.class);
+                else if (item.getItemId() == R.id.perfil) {
+                    Intent intent = new Intent(ComecandoInvestirActivity.this, PerfilActivity.class);
                     startActivity(intent);
-                    finish();
-                    return true;
-                }
-
-                if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(ComecandoInvestir.this, PerfilActivity.class);
-                    startActivity(intent);
-                    finish();
                     return true;
                 }
                 return false;
@@ -62,7 +49,7 @@ public class ComecandoInvestir extends AppCompatActivity {
         });
 
         txt_clique.setOnClickListener((View view ) -> {
-            Intent intent = new Intent(ComecandoInvestir.this, SimulacaoActivity.class);
+            Intent intent = new Intent(ComecandoInvestirActivity.this, InvestimentosActivity.class);
             startActivity(intent);
             finish();
         });

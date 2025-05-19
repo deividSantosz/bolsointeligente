@@ -51,7 +51,7 @@ public class InvestimentosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investimentos);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        txtCliqueAqui = findViewById(R.id.txt_clique);
+        txtCliqueAqui = findViewById(R.id.txt_clique_aqui_investimentos);
         tabLayout = findViewById(R.id.tabLayout);
         recyclerViewTiposInvestimento = findViewById(R.id.rv_tipo_investimento);
         recyclerViewAcao = findViewById(R.id.recycleviewAcao);
@@ -113,12 +113,6 @@ public class InvestimentosActivity extends AppCompatActivity {
                     return true;
                 }
 
-
-                if (item.getItemId() == R.id.comecandoinvestir) {
-                    Intent intent = new Intent(InvestimentosActivity.this, ComecandoInvestir.class);
-                    startActivity(intent);
-                    return true;
-                }
                 if (item.getItemId() == R.id.estatisticas) {
                     Intent intent = new Intent(InvestimentosActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
@@ -151,7 +145,7 @@ public class InvestimentosActivity extends AppCompatActivity {
     private List<DicaInvestimento> ListaDicas() {
         List<DicaInvestimento> listaDicas;
         listaDicas = new ArrayList<>();
-        listaDicas.add(new DicaInvestimento("Diversificação de Carteira", "Distribua seus investimentos...", DiversificacaoCarteira.class));
+        listaDicas.add(new DicaInvestimento("Diversificação de Carteira", "Distribua seus investimentos...", DiversificacaoCarteiraActivity.class));
         listaDicas.add(new DicaInvestimento("Investimentos de Longo Prazo", "O poder dos juros compostos...",  InvestimentosLongoPrazo.class));
         listaDicas.add(new DicaInvestimento("Renda Fixa vs. Variável", "Entenda as diferenças...",  RendaFixaVariavel.class));
 
@@ -170,7 +164,7 @@ public class InvestimentosActivity extends AppCompatActivity {
         List<DicaInvestimento> listaTiposInvestimentos;
         listaTiposInvestimentos = new ArrayList<>();
         listaTiposInvestimentos.add(new DicaInvestimento("Fundos Imobiliarios", "Aprenda o que são fundos imobiliarios.", FundosImobiliariosActivity.class));
-        listaTiposInvestimentos.add(new DicaInvestimento("Ações Brasileiras", "Entenda como funciona as ações no Brasil.",  FundosImobiliariosActivity.class));
+        listaTiposInvestimentos.add(new DicaInvestimento("Ações Brasileiras", "Entenda como funciona as ações no Brasil.", AcoesBrasileirasActivity.class));
         listaTiposInvestimentos.add(new DicaInvestimento("Criptomoedas", "Saiba como investir na moeda do futuro.",  FundosImobiliariosActivity.class));
 
         return listaTiposInvestimentos;

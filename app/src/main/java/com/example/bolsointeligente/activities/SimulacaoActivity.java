@@ -53,7 +53,7 @@ public class SimulacaoActivity extends AppCompatActivity {
         chartProjecao = findViewById(R.id.chart_projecao);
         tvResultado = findViewById(R.id.tv_resultado);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        txtCliqueAqui = findViewById(R.id.txt_clique);
+        txtCliqueAqui = findViewById(R.id.txt_clique_aqui);
         txtvalorfinal = findViewById(R.id.txt_valorfinal);
         tvResultado.setVisibility(View.GONE);
         txtvalorfinal.setVisibility(View.GONE);
@@ -75,7 +75,7 @@ public class SimulacaoActivity extends AppCompatActivity {
         });
 
         txtCliqueAqui.setOnClickListener((View view ) -> {
-            Intent intent = new Intent(SimulacaoActivity.this, InvestimentosActivity.class);
+            Intent intent = new Intent(SimulacaoActivity.this, ComecandoInvestirActivity.class);
             startActivity(intent);
             finish();
         });
@@ -93,11 +93,8 @@ public class SimulacaoActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
-                else if (item.getItemId() == R.id.comecandoinvestir) {
-                    Intent intent = new Intent(SimulacaoActivity.this, ComecandoInvestir.class);
-                    startActivity(intent);
-                    return true;
-                }
+
+
                 else if (item.getItemId() == R.id.perfil) {
                     Intent intent = new Intent(SimulacaoActivity.this, PerfilActivity.class);
                     startActivity(intent);
