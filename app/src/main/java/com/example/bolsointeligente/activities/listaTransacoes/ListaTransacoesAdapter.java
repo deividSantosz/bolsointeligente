@@ -89,5 +89,6 @@ public class ListaTransacoesAdapter extends RecyclerView.Adapter<ViewHolderLista
     public int getItemCount() {
         return listaTransacoes.size();
     }
+
 }
 

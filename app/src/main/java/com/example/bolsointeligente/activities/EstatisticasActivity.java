@@ -68,16 +68,23 @@ public class EstatisticasActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(EstatisticasActivity.this, PerfilActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                if (item.getItemId() == R.id.estatisticas) {
+                 if (item.getItemId() == R.id.home) {
                     Intent intent = new Intent(EstatisticasActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
                 }
+                 else if (item.getItemId() == R.id.simulador) {
+                     Intent intent = new Intent(EstatisticasActivity.this, SimulacaoActivity.class);
+                     startActivity(intent);
+                     return true;
+                 }
+
+                 else if (item.getItemId() == R.id.perfil) {
+                    Intent intent = new Intent(EstatisticasActivity.this, PerfilActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+
                 return false;
             }
 
