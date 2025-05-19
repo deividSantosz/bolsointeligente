@@ -112,7 +112,7 @@
         app:layout_constraintVertical_bias="0.578" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/txt_sair"
         android:layout_width="55dp"
         android:layout_height="29dp"
         android:layout_marginStart="28dp"

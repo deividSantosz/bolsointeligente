@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.bolsointeligente.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -13,13 +16,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class PerfilActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    TextView txt_sair;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil2);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
+        txt_sair = findViewById(R.id.txt_sair);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -42,6 +46,15 @@ public class PerfilActivity extends AppCompatActivity {
                 return false;
             }
 
+        });
+        txt_sair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PerfilActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Evita voltar com o botão "Voltar"
+                startActivity(intent);
+                finish();
+            }
         });
     }
 }
