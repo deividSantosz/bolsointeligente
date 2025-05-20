@@ -19,7 +19,7 @@ public class FundoCurvado extends View {
 
     private void init() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(0xFF429690); // Definir a cor sólida (cor #429690)
+        paint.setColor(0xFF429690);
         path = new Path();
     }
 
@@ -27,7 +27,7 @@ public class FundoCurvado extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Crie a curva na parte inferior
+        // Cria a curva na parte inferior
         path.reset();
         path.moveTo(0, 0); // Inicia no canto superior esquerdo
         path.lineTo(getWidth(), 0); // Linha até o canto superior direito

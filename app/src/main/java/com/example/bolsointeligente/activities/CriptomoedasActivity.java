@@ -14,32 +14,31 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.bolsointeligente.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class FundosImobiliariosActivity extends AppCompatActivity {
+public class CriptomoedasActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        BottomNavigationView bottomNavigationView;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fundos_imobiliarios);
+        setContentView(R.layout.activity_criptomoedas);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.home) {
-                    Intent intent = new Intent(FundosImobiliariosActivity.this, MenuActivity.class);
+                    Intent intent = new Intent(CriptomoedasActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
                 }
                 else if (item.getItemId() == R.id.estatisticas) {
-                    Intent intent = new Intent(FundosImobiliariosActivity.this, EstatisticasActivity.class);
+                    Intent intent = new Intent(CriptomoedasActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
                     return true;
                 }
 
                 else if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(FundosImobiliariosActivity.this, PerfilActivity.class);
+                    Intent intent = new Intent(CriptomoedasActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }
@@ -48,5 +47,4 @@ public class FundosImobiliariosActivity extends AppCompatActivity {
 
         });
     }
-
 }

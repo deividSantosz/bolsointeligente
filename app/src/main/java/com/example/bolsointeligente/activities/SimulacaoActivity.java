@@ -94,7 +94,6 @@ public class SimulacaoActivity extends AppCompatActivity {
                     return true;
                 }
 
-
                 else if (item.getItemId() == R.id.perfil) {
                     Intent intent = new Intent(SimulacaoActivity.this, PerfilActivity.class);
                     startActivity(intent);

@@ -38,7 +38,6 @@ public class AcoesBrasileirasActivity extends AppCompatActivity {
                     return true;
                 }
 
-
                 else if (item.getItemId() == R.id.perfil) {
                     Intent intent = new Intent(AcoesBrasileirasActivity.this, PerfilActivity.class);
                     startActivity(intent);

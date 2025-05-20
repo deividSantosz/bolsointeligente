@@ -9,7 +9,7 @@
     android:fillViewport="true"
     android:scrollbars="vertical"
     android:fadeScrollbars="false"
-    tools:context=".activities.AcoesBrasileirasActivity">
+    tools:context=".activities.CriptomoedasActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:fontFamily="@font/poppinsbold"
-            android:text="Ações Brasileiras"
+            android:text="Criptomoedas"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,9 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
-            android:text="O que são Ações?"
+            android:text="O que são Criptomoedas?"
             android:textColor="@color/primaria"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.432"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppinsmedium"
-            android:text="Ações são pequenas partes de uma empresa que você pode comprar. Ao adquirir ações, você se torna sócio da empresa e participa dos seus resultados."
+            android:text="Criptomoedas são moedas digitais descentralizadas que utilizam criptografia para segurança e funcionam com base na tecnologia blockchain."
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,17 +86,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_fundosimobiliarios">
 
+            <!-- Item 1 -->
             <TextView
                 android:layout_width="341dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppinsmedium"
-                android:text="Como funcionam as ações"
+                android:text="Como funcionam as criptomoedas"
                 android:textColor="@color/primaria"
                 android:textSize="23sp"
                 android:textStyle="bold" />
 
-            <!-- Item 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsmedium"
-                        android:text="Participação na empresa"
+                        android:text="Blockchain"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -128,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Ao comprar ações, você adquire uma fração da empresa e se torna um de seus proprietários."
+                        android:text="Tecnologia que funciona como um livro-razão público e distribuído, registrando todas as transações de forma segura e transparente."
                         android:textColor="#555"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -158,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsmedium"
-                        android:text="Dividendos"
+                        android:text="Descentralização"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Empresas distribuem parte de seus lucros aos acionistas na forma de dividendos."
+                        android:text="Não dependem de bancos centrais ou governos, funcionando através de uma rede de computadores distribuída globalmente."
                         android:textColor="#555"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -195,7 +195,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsmedium"
-                        android:text="Valorização"
+                        android:text="Criptografia"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -203,7 +203,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="O valor das ações pode aumentar com o tempo, gerando ganhos de capital quando você vende."
+                        android:text="Utiliza técnicas avançadas de criptografia para garantir a segurança das transações e controlar a criação de novas unidades."
                         android:textColor="#555"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -216,7 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:fontFamily="@font/poppinsbold"
-            android:text="Vantagens de investir em Ações"
+            android:text="Vantagens das Criptomoedas"
             android:textColor="@color/primaria"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -261,7 +261,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinsmedium"
-                    android:text="Potencial de retorno"
+                    android:text="Acesso global
+"
                     android:textColor="#000"
                     android:textStyle="bold" />
 
@@ -270,7 +271,9 @@
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinslight"
-                    android:text="Possibilidade de retornos acima da média do mercado."
+                    android:text="Transações sem fronteiras, 24 horas por dia.
+
+"
                     android:textColor="#000"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -301,7 +304,7 @@
 
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinsmedium"
-                    android:text="Renda passiva"
+                    android:text="Segurança"
                     android:textColor="#000"
                     android:textStyle="bold" />
 
@@ -310,7 +313,7 @@
                     android:layout_height="57dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinslight"
-                    android:text="Recebimento de dividendos periodicamente."
+                    android:text="Proteção por criptografia avançada."
                     android:textColor="#000"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -340,16 +343,17 @@
 
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinsmedium"
-                    android:text="Diversificação"
+                    android:text="Potencial de valorização
+"
                     android:textColor="#000"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="173dp"
-                    android:layout_height="72dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinslight"
-                    android:text="Possibilidade de investir em diferentes setores da economia."
+                    android:text="Possibilidade de altos retornos."
                     android:textColor="#000"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -378,7 +382,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinsmedium"
-                    android:text="Liquidez"
+                    android:text="Controle total"
                     android:textColor="#000"
                     android:textStyle="bold" />
 
@@ -387,7 +391,7 @@
                     android:layout_height="64dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinslight"
-                    android:text="Facilidade para comprar e vender no mercado."
+                    android:text="Você é o único dono dos seus ativos."
                     android:textColor="#000"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -401,7 +405,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/poppinsbold"
-            android:text="Tipos de Ações"
+            android:text="Principais Criptomoedas"
             android:textColor="@color/primaria"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -427,7 +431,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsmedium"
-                android:text="1. Ações Ordinárias (ON)"
+                android:text="1. Bitcoin (BTC)"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -436,7 +440,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Dão direito a voto nas assembleias da empresa. São identificadas pelo número 3 no final do código (ex: PETR3)"
+                android:text="A primeira e mais conhecida criptomoeda, criada em 2009. Funciona como 'ouro digital' e tem oferta limitada a 21 milhões de unidades."
                 android:textSize="14sp" />
 
             <TextView
@@ -469,7 +473,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsmedium"
-                android:text="2. Ações Preferenciais (PN)"
+                android:text="2. Ethereum (ETH)"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -478,7 +482,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Têm preferência no recebimento de dividendos, mas geralmente não dão direito a voto. São identificadas pelo número 4 (ex: PETR4)."
+                android:text="Plataforma que permite a criação de aplicativos descentralizados e contratos inteligentes, além de funcionar como moeda digital."
                 android:textSize="14sp" />
 
             <TextView
@@ -511,7 +515,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsmedium"
-                android:text="3.Units"
+                android:text="3.Altcoins"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -520,7 +524,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Certificados que agrupam ações ordinárias e preferenciais. São identificadas pelo número 11 (ex: SANB11)."
+                android:text="Termo que engloba todas as criptomoedas alternativas ao Bitcoin, como Cardano, Solana, Polkadot e milhares de outras."
                 android:textSize="14sp" />
 
             <TextView
@@ -551,8 +555,8 @@
 
         <LinearLayout
             android:id="@+id/card_riscos"
-            android:layout_width="376dp"
-            android:layout_height="305dp"
+            android:layout_width="378dp"
+            android:layout_height="322dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -607,7 +611,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsregular"
-                            android:text="Volatilidade"
+                            android:text="Alta volatilidade"
                             android:textColor="#000000"
                             android:textStyle="bold" />
 
@@ -615,7 +619,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsmedium"
-                            android:text="Os preços das ações podem oscilar significativamente no curto prazo."
+                            android:text="Preços podem variar drasticamente em curtos períodos de tempo."
                             android:textColor="#444444"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -645,7 +649,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsregular"
-                            android:text="Risco de mercado"
+                            android:text="Segurança da carteira"
                             android:textColor="#000000"
                             android:textStyle="bold" />
 
@@ -653,7 +657,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsregular"
-                            android:text="Crises econômicas podem afetar todo o mercado de ações."
+                            android:text="Risco de perda de acesso ou roubo se as chaves privadas não forem bem protegidas."
                             android:textColor="#444444"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -682,15 +686,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsregular"
-                            android:text="Risco da empresa"
+                            android:text="Regulamentação"
                             android:textColor="#000000"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
                             android:fontFamily="@font/poppinsregular"
-                            android:text="Problemas específicos da empresa podem desvalorizar suas ações."
+                            android:text="Mudanças regulatórias podem impactar o mercado de criptomoedas."
                             android:textColor="#444444"
                             android:textSize="14sp" />
                     </LinearLayout>

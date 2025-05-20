@@ -165,7 +165,7 @@ public class InvestimentosActivity extends AppCompatActivity {
         listaTiposInvestimentos = new ArrayList<>();
         listaTiposInvestimentos.add(new DicaInvestimento("Fundos Imobiliarios", "Aprenda o que são fundos imobiliarios.", FundosImobiliariosActivity.class));
         listaTiposInvestimentos.add(new DicaInvestimento("Ações Brasileiras", "Entenda como funciona as ações no Brasil.", AcoesBrasileirasActivity.class));
-        listaTiposInvestimentos.add(new DicaInvestimento("Criptomoedas", "Saiba como investir na moeda do futuro.",  FundosImobiliariosActivity.class));
+        listaTiposInvestimentos.add(new DicaInvestimento("Criptomoedas", "Saiba como investir na moeda do futuro.",  CriptomoedasActivity.class));
 
         return listaTiposInvestimentos;
     }
