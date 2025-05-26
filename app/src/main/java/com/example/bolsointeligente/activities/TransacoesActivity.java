@@ -23,6 +23,7 @@ import com.example.bolsointeligente.database.Transacao;
 import com.example.bolsointeligente.database.TransacaoDao;
 import com.example.bolsointeligente.singleton.UsuarioSingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,34 +110,31 @@ public class TransacoesActivity extends AppCompatActivity {
         }).attachToRecyclerView(recyclerView);
 
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.perfil) {
-                    Intent intent = new Intent(TransacoesActivity.this, PerfilActivity.class);
-                    startActivity(intent);
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.home) {
                     return true;
-                }
-               else if (item.getItemId() == R.id.estatisticas) {
+                } else if (itemId == R.id.estatisticas) {
                     Intent intent = new Intent(TransacoesActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
                     return true;
-                }
-                else if (item.getItemId() == R.id.home) {
-                    Intent intent = new Intent(TransacoesActivity.this, MenuActivity.class);
+                } else if (itemId == R.id.simulador) {
+                    Intent intent = new Intent(TransacoesActivity.this, SimulacaoActivity.class);
                     startActivity(intent);
                     return true;
-                }
-                else if (item.getItemId() == R.id.simulador) {
-                    Intent intent = new Intent(TransacoesActivity.this, SimulacaoActivity.class);
+                } else if (itemId == R.id.perfil) {
+                    Intent intent = new Intent(TransacoesActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }
                 return false;
             }
-
         });
 
+        bottomNavigationView.setSelectedItemId(R.id.home);
     }
     private void carregarTransacoes() {
         List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
@@ -150,7 +148,7 @@ public class TransacoesActivity extends AppCompatActivity {
         Double total = transacaoDao.getTotalTransacoesPorUsuario(usuarioId);
 
         if (total == null) {
-            total = 0.0; // Se não houver transações, evita erro de null
+            total = 0.0;
         }
         total_transacoes.setText(String.format("R$ %.2f", total));
     }

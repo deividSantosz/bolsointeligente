@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.bolsointeligente.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -24,10 +25,15 @@ public class PerfilActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         txt_sair = findViewById(R.id.txt_sair);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()  {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
+
+                int itemId = item.getItemId();
+                if (itemId == R.id.perfil) {
+                    return true;
+                }
+                if (itemId == R.id.home) {
                     Intent intent = new Intent(PerfilActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
@@ -37,7 +43,7 @@ public class PerfilActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
-                if (item.getItemId() == R.id.simulador) {
+              else if (item.getItemId() == R.id.simulador) {
                     Intent intent = new Intent(PerfilActivity.this, SimulacaoActivity.class);
                     startActivity(intent);
                     return true;
@@ -47,11 +53,13 @@ public class PerfilActivity extends AppCompatActivity {
             }
 
         });
+
+        bottomNavigationView.setSelectedItemId(R.id.perfil);
         txt_sair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Evita voltar com o botão "Voltar"
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }

@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,41 +55,44 @@ public class EstatisticasActivity extends AppCompatActivity {
 
         setupLineChart();
 
-        // Configurar a lista de transações
         usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
         transacaoDao = db.transacaoDao();
         adapter = new ListaTransacoesAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        // Agora chama o método para carregar as transações
         carregarTransacoes();
 
         setupLineChart();
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 if (item.getItemId() == R.id.home) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.estatisticas) {
+                    return true;
+                }
+                else if (itemId == R.id.home) {
                     Intent intent = new Intent(EstatisticasActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
                 }
-                 else if (item.getItemId() == R.id.simulador) {
-                     Intent intent = new Intent(EstatisticasActivity.this, SimulacaoActivity.class);
-                     startActivity(intent);
-                     return true;
-                 }
+                else if (itemId == R.id.simulador) {
+                    Intent intent = new Intent(EstatisticasActivity.this, SimulacaoActivity.class);
 
-                 else if (item.getItemId() == R.id.perfil) {
+                    startActivity(intent);
+                    return true;
+                }
+                else if (itemId == R.id.perfil) {
                     Intent intent = new Intent(EstatisticasActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }
-
                 return false;
             }
-
         });
+
+        bottomNavigationView.setSelectedItemId(R.id.estatisticas);
     }
     private void setupLineChart() {
         // Criar entradas para o gráfico

@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,10 +81,15 @@ public class SimulacaoActivity extends AppCompatActivity {
             finish();
         });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.simulador) {
+                    return true;
+                }
+                else if (itemId == R.id.home) {
                     Intent intent = new Intent(SimulacaoActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
@@ -103,6 +109,7 @@ public class SimulacaoActivity extends AppCompatActivity {
             }
 
         });
+        bottomNavigationView.setSelectedItemId(R.id.simulador);
     }
 
     private void configurarGrafico() {

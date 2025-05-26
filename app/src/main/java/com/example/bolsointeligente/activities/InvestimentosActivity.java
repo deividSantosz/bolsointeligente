@@ -22,6 +22,7 @@ import com.example.bolsointeligente.database.Acao;
 import com.example.bolsointeligente.database.DicaInvestimento;
 import com.example.bolsointeligente.database.RendaFixa;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 import com.example.bolsointeligente.api.AcaoApiService;
 import com.example.bolsointeligente.api.RetrofitClient;
@@ -104,27 +105,26 @@ public class InvestimentosActivity extends AppCompatActivity {
         });
 
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.simulador) {
+                    return true;
+                }
+                else if (itemId == R.id.home) {
                     Intent intent = new Intent(InvestimentosActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
                 }
-
-                if (item.getItemId() == R.id.estatisticas) {
+                else if (item.getItemId() == R.id.estatisticas) {
                     Intent intent = new Intent(InvestimentosActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
                     return true;
                 }
 
-                if (item.getItemId() == R.id.simulador) {
-                    Intent intent = new Intent(InvestimentosActivity.this, SimulacaoActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                if (item.getItemId() == R.id.perfil) {
+                else if (item.getItemId() == R.id.perfil) {
                     Intent intent = new Intent(InvestimentosActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
@@ -133,6 +133,8 @@ public class InvestimentosActivity extends AppCompatActivity {
             }
 
         });
+         bottomNavigationView.setSelectedItemId(R.id.simulador);
+
 
         txtCliqueAqui.setOnClickListener((View view ) -> {
             Intent intent = new Intent(InvestimentosActivity.this, SimulacaoActivity.class);

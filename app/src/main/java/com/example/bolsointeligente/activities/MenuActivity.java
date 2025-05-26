@@ -22,6 +22,7 @@ import com.example.bolsointeligente.database.TransacaoDao;
 import com.example.bolsointeligente.fragments.AdicionarTransacao;
 import com.example.bolsointeligente.singleton.UsuarioSingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,31 +67,34 @@ public class MenuActivity extends AppCompatActivity {
         atualizarDadosFinanceiros();
         carregarTransacoes();
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
 
-                if (item.getItemId() == R.id.estatisticas) {
+                if (itemId == R.id.home) {
+                    return true;
+                } else if (itemId == R.id.estatisticas) {
                     Intent intent = new Intent(MenuActivity.this, EstatisticasActivity.class);
                     startActivity(intent);
                     return true;
-                }
-
-                if (item.getItemId() == R.id.simulador) {
+                } else if (itemId == R.id.simulador) {
                     Intent intent = new Intent(MenuActivity.this, SimulacaoActivity.class);
                     startActivity(intent);
                     return true;
-                }
-                if (item.getItemId() == R.id.perfil) {
+                } else if (itemId == R.id.perfil) {
                     Intent intent = new Intent(MenuActivity.this, PerfilActivity.class);
                     startActivity(intent);
                     return true;
                 }
                 return false;
             }
-
         });
-       btnAddTransacao.setOnClickListener(new View.OnClickListener() {
+
+
+         bottomNavigationView.setSelectedItemId(R.id.home);
+
+        btnAddTransacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AdicionarTransacao fragment = new AdicionarTransacao();

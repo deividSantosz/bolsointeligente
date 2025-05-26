@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bolsointeligente.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class ComecandoInvestirActivity extends AppCompatActivity {
     TextView txt_clique;
@@ -20,13 +21,18 @@ public class ComecandoInvestirActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comecando_investir);
-        txt_clique = findViewById(R.id.txt_clique_aqui_investimentos);
+         txt_clique = findViewById(R.id.txt_clique_aqui_investimentos);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.simulador) {
+                    return true;
+                }
+               else if (itemId == R.id.home) {
                     Intent intent = new Intent(ComecandoInvestirActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
@@ -37,7 +43,6 @@ public class ComecandoInvestirActivity extends AppCompatActivity {
                     return true;
                 }
 
-
                 else if (item.getItemId() == R.id.perfil) {
                     Intent intent = new Intent(ComecandoInvestirActivity.this, PerfilActivity.class);
                     startActivity(intent);
@@ -47,6 +52,8 @@ public class ComecandoInvestirActivity extends AppCompatActivity {
             }
 
         });
+        bottomNavigationView.setSelectedItemId(R.id.simulador);
+
 
         txt_clique.setOnClickListener((View view ) -> {
             Intent intent = new Intent(ComecandoInvestirActivity.this, InvestimentosActivity.class);

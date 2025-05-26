@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.bolsointeligente.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class CriptomoedasActivity extends AppCompatActivity {
 
@@ -22,11 +23,15 @@ public class CriptomoedasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criptomoedas);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.simulador) {
+                    return true;
+                }
+                else if (itemId == R.id.home) {
                     Intent intent = new Intent(CriptomoedasActivity.this, MenuActivity.class);
                     startActivity(intent);
                     return true;
@@ -46,5 +51,7 @@ public class CriptomoedasActivity extends AppCompatActivity {
             }
 
         });
+        bottomNavigationView.setSelectedItemId(R.id.simulador);
     }
 }
+
