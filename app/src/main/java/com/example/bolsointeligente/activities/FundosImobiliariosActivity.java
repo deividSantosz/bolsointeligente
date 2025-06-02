@@ -1,8 +1,11 @@
 package com.example.bolsointeligente.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,14 +19,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class FundosImobiliariosActivity extends AppCompatActivity {
-
+    ImageView seta;
     BottomNavigationView bottomNavigationView;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fundos_imobiliarios);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
+        seta = findViewById(R.id.seta_fundos);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -54,6 +58,12 @@ public class FundosImobiliariosActivity extends AppCompatActivity {
 
         });
         bottomNavigationView.setSelectedItemId(R.id.simulador);
-    }
 
+
+        seta.setOnClickListener((View view) -> {
+            finish();
+        });
+
+    }
 }
+

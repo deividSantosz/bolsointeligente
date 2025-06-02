@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bolsointeligente.R;
 
-public class RendaFixaVariavel extends AppCompatActivity {
+public class RendaFixaVariavelActivity extends AppCompatActivity {
     ImageView seta;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -39,7 +39,7 @@
             android:name=".activities.EditarTransacaoActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RendaFixaVariavel"
+            android:name=".activities.RendaFixaVariavelActivity"
             android:exported="false" />
         <activity
             android:name=".activities.InvestimentosActivity"

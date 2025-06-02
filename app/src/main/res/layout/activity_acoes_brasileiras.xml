@@ -19,15 +19,17 @@
         android:padding="0dp">
 
         <!-- Fundo curvado -->
+
+        <!-- Título -->
+
         <com.example.bolsointeligente.view.FundoCurvado
             android:id="@+id/fundoCurvado3"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Título -->
 
         <TextView
             android:id="@+id/tvTitulo"
@@ -714,5 +716,17 @@
             app:layout_constraintTop_toBottomOf="@+id/card_riscos"
             app:layout_constraintVertical_bias="0.96"
             app:menu="@menu/bottom_nav_menu" />
+
+        <ImageView
+            android:id="@+id/seta_acoes"
+            android:layout_width="47dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

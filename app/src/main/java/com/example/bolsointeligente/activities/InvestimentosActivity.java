@@ -149,7 +149,7 @@ public class InvestimentosActivity extends AppCompatActivity {
         listaDicas = new ArrayList<>();
         listaDicas.add(new DicaInvestimento("Diversificação de Carteira", "Distribua seus investimentos...", DiversificacaoCarteiraActivity.class));
         listaDicas.add(new DicaInvestimento("Investimentos de Longo Prazo", "O poder dos juros compostos...",  InvestimentosLongoPrazo.class));
-        listaDicas.add(new DicaInvestimento("Renda Fixa vs. Variável", "Entenda as diferenças...",  RendaFixaVariavel.class));
+        listaDicas.add(new DicaInvestimento("Renda Fixa vs. Variável", "Entenda as diferenças...",  RendaFixaVariavelActivity.class));
 
         return listaDicas;
     }
