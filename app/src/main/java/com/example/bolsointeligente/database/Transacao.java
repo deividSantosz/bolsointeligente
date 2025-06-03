@@ -10,7 +10,7 @@ import java.util.Date;
         foreignKeys = @ForeignKey(
                 entity = Usuario.class, // Relaciona com a tabela de usuários
                 parentColumns = "id", // Coluna na tabela de usuários
-                childColumns = "idUsuario", // Coluna nesta tabela (o nome estava correto como idUsuario)
+                childColumns = "idUsuario", // Coluna nesta tabela
                 onDelete = ForeignKey.CASCADE // Exclui as transações ao deletar o usuário
         )
 )

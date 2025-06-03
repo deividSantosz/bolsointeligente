@@ -87,7 +87,7 @@ public class AdicionarTransacao extends Fragment {
 
 
         // Lista de categorias para o AutoCompleteTextView
-        String[] categorias = {"Alimentação", "Transporte", "Lazer", "Saúde", "Outros", "Animal", "Beleza", "Educação", "Investimentos"};
+        String[] categorias = {"Alimentação", "Transporte", "Lazer", "Saúde", "Outros", "Animal", "Educação", "Investimentos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, categorias);
         autoCompleteCategory.setAdapter(adapter);
         autoCompleteCategory.setOnFocusChangeListener((v, hasFocus) -> {

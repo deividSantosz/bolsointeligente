@@ -91,8 +91,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-
-         bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
         btnAddTransacao.setOnClickListener(new View.OnClickListener() {
             @Override
