@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data de Início:"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:labelFor="@+id/tv_data_inicio_filtro"/>
+
+    <TextView
+        android:id="@+id/tv_data_inicio_filtro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:background="?attr/editTextBackground"
+        android:hint="DD/MM/AAAA"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:drawablePadding="8dp"
+       /> <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Data de Fim:"
+    android:textAppearance="?attr/textAppearanceSubtitle1"
+    android:layout_marginTop="16dp"
+    android:labelFor="@+id/tv_data_fim_filtro"/>
+
+    <TextView
+        android:id="@+id/tv_data_fim_filtro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:background="?attr/editTextBackground"
+        android:hint="DD/MM/AAAA"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:drawablePadding="8dp"
+
+         /> </LinearLayout>

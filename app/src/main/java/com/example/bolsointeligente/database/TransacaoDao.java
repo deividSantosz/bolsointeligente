@@ -27,4 +27,7 @@ public interface TransacaoDao {
     @Query("DELETE FROM transacao WHERE id = :transacaoId")
     void deletarTransacao(int transacaoId);
 
+    @Query("SELECT * FROM transacao WHERE idUsuario = :usuarioId AND data BETWEEN :dataInicio AND :dataFim ORDER BY data ASC")
+    List<Transacao> listarTransacoesPorUsuarioEPeriodo(int usuarioId, long dataInicio, long dataFim);
+
 }

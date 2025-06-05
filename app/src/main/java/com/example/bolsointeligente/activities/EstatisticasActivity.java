@@ -2,20 +2,25 @@ package com.example.bolsointeligente.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+// Remova a importação da Toolbar se não estiver usando a MaterialToolbar do XML
+// import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog; // Import para DatePickerDialog
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater; // Import para LayoutInflater
 import android.view.MenuItem;
-import android.widget.Spinner;
+import android.view.View; // Import para View
+import android.widget.DatePicker; // Já importado
+import android.widget.ImageView;
+import android.widget.TextView; // Import para TextView
+import android.widget.Toast; // Import para Toast
 
-import com.example.bolsointeligente.activities.listaTransacoes.ListaTransacoesAdapter;
 import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.database.Database;
 import com.example.bolsointeligente.database.Transacao;
@@ -23,7 +28,7 @@ import com.example.bolsointeligente.database.TransacaoDao;
 import com.example.bolsointeligente.database.UsuarioDao;
 import com.example.bolsointeligente.singleton.UsuarioSingleton;
 
-import com.github.mikephil.charting.charts.BarChart; // Import para BarChart
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -34,8 +39,9 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter; // Para formatar eixo X do BarChart
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter; // Import para PercentFormatter
+import com.github.mikephil.charting.utils.ColorTemplate; // Import para ColorTemplate
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -56,76 +62,184 @@ public class EstatisticasActivity extends AppCompatActivity {
     private int usuarioId;
     private TransacaoDao transacaoDao;
     private UsuarioDao usuarioDao;
+    private ImageView iconefiltro;
+
+    private Calendar dataInicioSelecionada = Calendar.getInstance();
+    private Calendar dataFimSelecionada = Calendar.getInstance();
+    private SimpleDateFormat formatoDataView = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_estatisticas); // Certifique-se que este é o layout com ConstraintLayout como pai
+        setContentView(R.layout.activity_estatisticas);
+
         db = Room.databaseBuilder(getApplicationContext(), com.example.bolsointeligente.database.Database.class, "Bolso Inteligente DB")
                 .fallbackToDestructiveMigration()
-                .allowMainThreadQueries() // Lembre-se: idealmente, mova para background thread
+                .allowMainThreadQueries()
                 .build();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         pieChart = findViewById(R.id.pie_chart_despesas_categoria);
         barChart = findViewById(R.id.bar_chart_receitas_despesas);
+        iconefiltro = findViewById(R.id.iconefiltro);
 
         usuarioId = (int) UsuarioSingleton.getInstance().getUserId();
         transacaoDao = db.transacaoDao();
         usuarioDao = db.usuarioDao();
-        setupPieChart();
-        setupBarChart();
 
+        carregarGraficosComTodosOsDados();
+
+
+        iconefiltro.setOnClickListener(v -> mostrarDialogoDeFiltroIntervaloDatas());
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
-
                 if (itemId == R.id.estatisticas) {
                     return true;
                 } else if (itemId == R.id.home) {
                     Intent intent = new Intent(EstatisticasActivity.this, MenuActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
-                    finish(); // Finaliza a EstatisticasActivity
+                    finish();
                     return true;
                 } else if (itemId == R.id.simulador) {
                     Intent intent = new Intent(EstatisticasActivity.this, SimulacaoActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
-                    finish(); // Finaliza a EstatisticasActivity
+                    finish();
                     return true;
                 } else if (itemId == R.id.perfil) {
                     Intent intent = new Intent(EstatisticasActivity.this, PerfilActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
-                    finish(); // Finaliza a EstatisticasActivity
+                    finish();
                     return true;
                 }
                 return false;
             }
         });
-
         bottomNavigationView.setSelectedItemId(R.id.estatisticas);
     }
 
-    private void setupPieChart() {
+    private void carregarGraficosComTodosOsDados() {
         List<Transacao> todasTransacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
+        long dataMin = Long.MAX_VALUE;
+        long dataMax = 0L;
+        if (todasTransacoes != null && !todasTransacoes.isEmpty()) {
+            for (Transacao t : todasTransacoes) {
+                if(t.getData() == 0) continue;
+                if (t.getData() < dataMin) dataMin = t.getData();
+                if (t.getData() > dataMax) dataMax = t.getData();
+            }
+        } else {
+            dataMin = 0L; // Define um padrão se não houver transações
+            dataMax = System.currentTimeMillis();
+        }
 
-        if (todasTransacoes == null || todasTransacoes.isEmpty()) {
+        setupPieChartComDados(todasTransacoes);
+        setupBarChartComDados(todasTransacoes, dataMin, dataMax);
+    }
+    private void mostrarDialogoDeFiltroIntervaloDatas() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        // Lembre-se de criar este arquivo de layout: res/layout/dialog_filtro_intervalo_datas.xml
+        View dialogView = inflater.inflate(R.layout.dialog_filtro_intervalo_datas, null);
+        builder.setView(dialogView);
+
+        final TextView tvDataInicioDialog = dialogView.findViewById(R.id.tv_data_inicio_filtro);
+        final TextView tvDataFimDialog = dialogView.findViewById(R.id.tv_data_fim_filtro);
+
+        Calendar tempCalInicio = (Calendar) dataInicioSelecionada.clone();
+        Calendar tempCalFim = (Calendar) dataFimSelecionada.clone();
+
+        tvDataInicioDialog.setText(formatoDataView.format(tempCalInicio.getTime()));
+        tvDataFimDialog.setText(formatoDataView.format(tempCalFim.getTime()));
+
+        tvDataInicioDialog.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    (view, year, month, dayOfMonth) -> {
+                        tempCalInicio.set(year, month, dayOfMonth);
+                        tvDataInicioDialog.setText(formatoDataView.format(tempCalInicio.getTime()));
+                    },
+                    tempCalInicio.get(Calendar.YEAR),
+                    tempCalInicio.get(Calendar.MONTH),
+                    tempCalInicio.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            if (tempCalFim != null) {
+                datePickerDialog.getDatePicker().setMaxDate(tempCalFim.getTimeInMillis());
+            }
+            datePickerDialog.show();
+        });
+
+        tvDataFimDialog.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    (view, year, month, dayOfMonth) -> {
+                        tempCalFim.set(year, month, dayOfMonth);
+                        tvDataFimDialog.setText(formatoDataView.format(tempCalFim.getTime()));
+                    },
+                    tempCalFim.get(Calendar.YEAR),
+                    tempCalFim.get(Calendar.MONTH),
+                    tempCalFim.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            if (tempCalInicio != null) {
+                datePickerDialog.getDatePicker().setMinDate(tempCalInicio.getTimeInMillis());
+            }
+            datePickerDialog.show();
+        });
+
+        builder.setTitle("Filtrar por Período");
+        // Botão para aplicar o filtro de datas
+        builder.setPositiveButton("Aplicar", (dialog, which) -> {
+            if (tempCalFim.before(tempCalInicio)) {
+                Toast.makeText(this, "Data final não pode ser anterior à data inicial.", Toast.LENGTH_LONG).show();
+                return;
+            }
+            dataInicioSelecionada = (Calendar) tempCalInicio.clone();
+            dataFimSelecionada = (Calendar) tempCalFim.clone();
+
+            dataInicioSelecionada.set(Calendar.HOUR_OF_DAY, 0); dataInicioSelecionada.set(Calendar.MINUTE, 0); dataInicioSelecionada.set(Calendar.SECOND, 0);
+            dataFimSelecionada.set(Calendar.HOUR_OF_DAY, 23); dataFimSelecionada.set(Calendar.MINUTE, 59); dataFimSelecionada.set(Calendar.SECOND, 59);
+
+            atualizarGraficosComBaseNoPeriodo(dataInicioSelecionada.getTimeInMillis(), dataFimSelecionada.getTimeInMillis());
+        });
+        // Botão para cancelar
+        builder.setNegativeButton("Cancelar", null);
+        // Botão para limpar o filtro e mostrar tudo
+        builder.setNeutralButton("Mostrar Todos", (dialog, which) -> {
+            Toast.makeText(this, "Exibindo todas as transações", Toast.LENGTH_SHORT).show();
+            carregarGraficosComTodosOsDados();
+        });
+
+        builder.create().show();
+    }
+
+
+    private void atualizarGraficosComBaseNoPeriodo(long dataInicioMillis, long dataFimMillis) {
+        Log.d("EstatisticasActivity", "Filtrando de: " + formatoDataView.format(dataInicioMillis) + " ate " + formatoDataView.format(dataFimMillis));
+        List<Transacao> transacoesFiltradas = transacaoDao.listarTransacoesPorUsuarioEPeriodo(usuarioId, dataInicioMillis, dataFimMillis);
+
+        setupPieChartComDados(transacoesFiltradas);
+        setupBarChartComDados(transacoesFiltradas, dataInicioMillis, dataFimMillis);
+    }
+
+    // setupPieChart agora recebe a lista de transações
+    // Dentro da sua classe EstatisticasActivity
+
+    private void setupPieChartComDados(List<Transacao> transacoesDoPeriodo) {
+        if (transacoesDoPeriodo == null || transacoesDoPeriodo.isEmpty()) {
             pieChart.clear();
-            pieChart.setCenterText("Sem transações para exibir");
             pieChart.invalidate();
             return;
         }
 
         Map<String, Double> despesasPorNomeCategoria = new HashMap<>();
-        for (Transacao transacao : todasTransacoes) {
+        for (Transacao transacao : transacoesDoPeriodo) {
             if (transacao.getValor() < 0) {
                 double valorDespesa = Math.abs(transacao.getValor());
-                String nomeCategoriaDaTransacao = transacao.getCategoria(); // Supondo que getCategoria() retorna a String
-
+                String nomeCategoriaDaTransacao = transacao.getCategoria();
                 if (nomeCategoriaDaTransacao == null || nomeCategoriaDaTransacao.trim().isEmpty()) {
                     nomeCategoriaDaTransacao = "Outros";
                 }
@@ -136,7 +250,7 @@ public class EstatisticasActivity extends AppCompatActivity {
 
         if (despesasPorNomeCategoria.isEmpty()) {
             pieChart.clear();
-            pieChart.setCenterText("Sem despesas registradas");
+            pieChart.setCenterText("Sem despesas para categorizar");
             pieChart.invalidate();
             return;
         }
@@ -148,15 +262,18 @@ public class EstatisticasActivity extends AppCompatActivity {
             }
         }
 
-        if (pieEntries.isEmpty()){
+        if (pieEntries.isEmpty()) {
             pieChart.clear();
-            pieChart.setCenterText("Sem despesas para categorizar");
+            pieChart.setCenterText("Sem dados de despesa");
             pieChart.invalidate();
             return;
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
 
+        // Configuração das cores (sua lógica de cores aqui)
+        // ...
+        // Exemplo:
         Map<String, Integer> coresDasCategorias = new HashMap<>();
         coresDasCategorias.put("Alimentação", Color.parseColor("#FF0000"));
         coresDasCategorias.put("Saúde", Color.parseColor("#368FF4"));
@@ -169,63 +286,57 @@ public class EstatisticasActivity extends AppCompatActivity {
 
         ArrayList<Integer> coresParaOGrafico = new ArrayList<>();
         for (PieEntry entry : pieEntries) {
-            String nomeCategoria = entry.getLabel();
-            // Pega a cor definida para a categoria, ou uma cor padrão se a categoria não estiver no mapa
-            // (útil se uma nova categoria aparecer nas transações antes de ser adicionada ao mapa de cores)
-            coresParaOGrafico.add(coresDasCategorias.getOrDefault(nomeCategoria, Color.LTGRAY));
+            coresParaOGrafico.add(coresDasCategorias.getOrDefault(entry.getLabel(), Color.LTGRAY));
         }
-        dataSet.setColors(coresParaOGrafico);
+        if (!coresParaOGrafico.isEmpty()) { dataSet.setColors(coresParaOGrafico); }
 
-        dataSet.setValueTextColor(Color.BLACK);
-        dataSet.setValueTextSize(11f);
+        dataSet.setValueTextSize(10f);
+        dataSet.setValueTextColor(Color.DKGRAY);
         dataSet.setSliceSpace(2f);
 
         dataSet.setValueLinePart1OffsetPercentage(80.f);
-        dataSet.setValueLinePart1Length(0.4f);
-        dataSet.setValueLinePart2Length(0.6f);
+        dataSet.setValueLinePart1Length(0.3f);
+        dataSet.setValueLinePart2Length(0.4f);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
 
         PieData pieData = new PieData(dataSet);
-        pieData.setValueFormatter(new com.github.mikephil.charting.formatter.PercentFormatter(pieChart));
-        pieData.setValueTextSize(11f);
-        pieData.setValueTextColor(Color.DKGRAY);
+        pieData.setValueFormatter(new PercentFormatter(pieChart));
 
         pieChart.setData(pieData);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setCenterTextSize(16f);
         pieChart.setCenterTextColor(Color.DKGRAY);
-
         pieChart.setDrawEntryLabels(false);
+
+        pieChart.setExtraOffsets(20.f, 5.f, 20.f, 5.f);
+
+        pieChart.setRotationEnabled(false);
+        pieChart.setHighlightPerTapEnabled(true);
 
         Legend legend = pieChart.getLegend();
         legend.setEnabled(true);
-        legend.setForm(Legend.LegendForm.CIRCLE); // Para combinar com as "bolinhas" da sua imagem
-        legend.setTextSize(11f); // Ajuste conforme necessário
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setTextSize(11f);
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         legend.setWordWrapEnabled(true);
         legend.setDrawInside(false);
-        legend.setYEntrySpace(5f); // Espaço vertical entre itens da legenda se quebrar linha
-        legend.setXEntrySpace(10f); // Espaço horizontal entre itens da legenda
+        legend.setYEntrySpace(5f);
+        legend.setXEntrySpace(10f);
 
-        pieChart.setExtraOffsets(5.f, 10.f, 5.f, legend.mNeededHeight + 5f); // Ajusta offset inferior para a legenda
         pieChart.animateY(1000);
         pieChart.invalidate();
     }
-    private void setupBarChart() {
+
+    // setupBarChart agora recebe a lista de transações e as datas para gerar os meses
+    private void setupBarChartComDados(List<Transacao> transacoesDoPeriodo, long dataInicioPeriodo, long dataFimPeriodo) {
         Double rendaMensalDouble = null;
-        if (db != null) {
-
-            if (usuarioDao != null) {
-                rendaMensalDouble = usuarioDao.getUserRenda(usuarioId);
-            } else {
-                Log.e("EstatisticasActivity", "UsuarioDao é NULO ao tentar obter renda.");
-
-            }
+        if (usuarioDao != null) { // usuarioDao já foi inicializado em onCreate
+            rendaMensalDouble = usuarioDao.getUserRenda(usuarioId);
         } else {
-            Log.e("EstatisticasActivity", "Database (db) é NULO ao tentar obter UsuarioDao.");
+            Log.e("EstatisticasActivity", "UsuarioDao é NULO ao tentar obter renda.");
         }
 
         float rendaMensalParaGrafico = 0f;
@@ -233,28 +344,23 @@ public class EstatisticasActivity extends AppCompatActivity {
             rendaMensalParaGrafico = rendaMensalDouble.floatValue();
         }
 
-
-        List<Transacao> todasTransacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
-        if (todasTransacoes == null || todasTransacoes.isEmpty() && rendaMensalParaGrafico <= 0) {
+        if ((transacoesDoPeriodo == null || transacoesDoPeriodo.isEmpty()) && rendaMensalParaGrafico <= 0) {
             barChart.clear();
             barChart.setNoDataText("Sem dados para exibir.");
             barChart.invalidate();
             return;
         }
 
-        // 2. Processar Transações para obter Despesas Mensais
-        Map<String, Double> despesasPorMes = new TreeMap<>(); // TreeMap para ordenar por chave (mês/ano)
+        Map<String, Double> despesasPorMes = new TreeMap<>();
         SimpleDateFormat monthYearFormat = new SimpleDateFormat("MMM/yy", new Locale("pt", "BR"));
-        Calendar cal = Calendar.getInstance();
+        Calendar calIter = Calendar.getInstance();
 
-        if (todasTransacoes != null) {
-            for (Transacao t : todasTransacoes) {
-                // Supondo que Transacao tem um campo 'data' do tipo long (timestamp)
-                if (t.getData() == 0) continue; // Pular transações sem data válida
-                cal.setTimeInMillis(t.getData());
-                String mesAno = monthYearFormat.format(cal.getTime());
-
-                if (t.getValor() < 0) { // Apenas despesas
+        if (transacoesDoPeriodo != null) {
+            for (Transacao t : transacoesDoPeriodo) {
+                if (t.getData() == 0) continue;
+                calIter.setTimeInMillis(t.getData());
+                String mesAno = monthYearFormat.format(calIter.getTime());
+                if (t.getValor() < 0) {
                     despesasPorMes.put(mesAno, despesasPorMes.getOrDefault(mesAno, 0.0) + Math.abs(t.getValor()));
                 }
             }
@@ -263,95 +369,82 @@ public class EstatisticasActivity extends AppCompatActivity {
         ArrayList<BarEntry> entriesRenda = new ArrayList<>();
         ArrayList<BarEntry> entriesDespesas = new ArrayList<>();
         final ArrayList<String> xAxisLabels = new ArrayList<>();
-
         int index = 0;
 
-        // Define o período para o gráfico (ex: últimos 6 meses, ou baseado no spinner)
-        // Para este exemplo, vamos usar os meses onde houve despesas, ou os últimos X meses se não houver despesas mas houver renda.
-        Map<String, Boolean> mesesConsiderados = new TreeMap<>();
-        if (!despesasPorMes.isEmpty()) {
-            for (String mes : despesasPorMes.keySet()) {
-                mesesConsiderados.put(mes, true);
-            }
-        } else if (rendaMensalParaGrafico > 0) { // Se não há despesas, mas há renda, mostre para alguns meses recentes
-            Calendar tempCal = Calendar.getInstance();
-            for (int i = 5; i >= 0; i--) { // Ex: últimos 6 meses (incluindo o atual)
-                tempCal.setTime(Calendar.getInstance().getTime());
-                tempCal.add(Calendar.MONTH, -i);
-                mesesConsiderados.put(monthYearFormat.format(tempCal.getTime()), true);
-            }
-        }
-        for (String mesAno : mesesConsiderados.keySet()) {
-            xAxisLabels.add(mesAno.substring(0, 3)); // Usar apenas as 3 primeiras letras do mês para o label
-            float despesaDoMes = despesasPorMes.getOrDefault(mesAno, 0.0).floatValue();
+        // Gerar rótulos de meses para o período selecionado
+        Calendar calInicio = Calendar.getInstance();
+        calInicio.setTimeInMillis(dataInicioPeriodo);
+        Calendar calFim = Calendar.getInstance();
+        calFim.setTimeInMillis(dataFimPeriodo);
 
+        // Normaliza para o início do mês de início e fim do mês de fim para iterar
+        calInicio.set(Calendar.DAY_OF_MONTH, 1);
+
+        while (!calInicio.after(calFim)) {
+            String mesAnoLabel = monthYearFormat.format(calInicio.getTime());
+            xAxisLabels.add(mesAnoLabel.substring(0, 3)); // Ex: "Mai"
+
+            float despesaDoMes = despesasPorMes.getOrDefault(mesAnoLabel, 0.0).floatValue();
             entriesRenda.add(new BarEntry(index, rendaMensalParaGrafico));
             entriesDespesas.add(new BarEntry(index, despesaDoMes));
             index++;
+            calInicio.add(Calendar.MONTH, 1); // Próximo mês
         }
 
 
         if (entriesRenda.isEmpty() && entriesDespesas.isEmpty()) {
             barChart.clear();
-            barChart.setNoDataText("Sem dados para exibir.");
+            barChart.setNoDataText("Sem dados para exibir para o período.");
             barChart.invalidate();
             return;
         }
 
         BarDataSet setRenda = new BarDataSet(entriesRenda, "Renda");
-        setRenda.setColor(Color.parseColor("#3498DB")); // Azul para Renda
+        setRenda.setColor(Color.parseColor("#3498DB"));
         setRenda.setValueTextSize(10f);
         setRenda.setDrawValues(false);
 
         BarDataSet setDespesas = new BarDataSet(entriesDespesas, "Despesas");
-        setDespesas.setColor(Color.parseColor("#E74C3C")); // Vermelho para Despesas
+        setDespesas.setColor(Color.parseColor("#E74C3C"));
         setDespesas.setValueTextSize(10f);
         setDespesas.setDrawValues(true);
 
-
-        // Configuração para barras agrupadas
         float groupSpace = 0.14f;
-        float barSpace = 0.03f; // x2 DataSets
-        float barWidth = 0.40f;  // x2 DataSets
+        float barSpace = 0.03f;
+        float barWidth = 0.40f;
         BarData data = new BarData(setRenda, setDespesas);
         data.setBarWidth(barWidth);
 
         barChart.setData(data);
         barChart.getDescription().setEnabled(false);
 
-        if (index > 0) { // Só agrupa e formata eixos se houver dados
-            // O ponto de partida para groupBars é o primeiro grupo.
-            // As labels do XAxis precisam corresponder ao centro dos grupos.
+        if (index > 0) {
             barChart.groupBars(0f, groupSpace, barSpace);
-
             XAxis xAxis = barChart.getXAxis();
             xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLabels));
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             xAxis.setGranularity(1f);
             xAxis.setGranularityEnabled(true);
-            xAxis.setCenterAxisLabels(true); // Centraliza os rótulos entre as barras do grupo
-            xAxis.setAxisMinimum(0f);
-            // O máximo do eixo X deve ser o número de grupos (index)
-            // A largura total que os grupos ocuparão é data.getGroupWidth(groupSpace, barSpace) * index
-            // Para que o groupBars funcione corretamente e o último grupo seja visível,
-            // o AxisMaximum deve ser igual ao número de entradas (grupos)
-            xAxis.setAxisMaximum(index);
-            // xAxis.setLabelCount(index, false); // Força o número de labels
+            xAxis.setCenterAxisLabels(true);
+            xAxis.setAxisMinimum(0f); // Ajustado para o início dos grupos
+            xAxis.setAxisMaximum(index); // Ajustado para o número de grupos
+            // Se groupBars é usado, o XAxis deve cobrir a largura total dos grupos.
+            // O valor de x para groupBars é o 'fromX', o início do primeiro grupo.
+            // O eixo X precisa ter um range de 'fromX' até 'fromX + número_de_grupos'.
+            // Se fromX é 0f, então o máximo é 'index'.
 
             YAxis leftAxis = barChart.getAxisLeft();
-            leftAxis.setAxisMinimum(0f); // Garante que o eixo Y comece em 0
-            leftAxis.setSpaceTop(15f); // Adiciona um pouco de espaço no topo
-
+            leftAxis.setAxisMinimum(0f);
+            leftAxis.setSpaceTop(15f);
             barChart.getAxisRight().setEnabled(false);
             barChart.getLegend().setEnabled(true);
             barChart.setDrawGridBackground(false);
-            barChart.setFitBars(true); // Tenta fazer as barras se encaixarem bem
+            barChart.setFitBars(true);
             barChart.animateY(1000);
         } else {
-            barChart.clear(); // Limpa se não houver dados para os grupos
-            barChart.setNoDataText("Sem dados suficientes para os meses selecionados.");
+            barChart.clear();
+            barChart.setNoDataText("Sem dados para os meses do período.");
         }
-        barChart.invalidate(); // Atualiza o gráfico
+        barChart.invalidate();
     }
-
 }

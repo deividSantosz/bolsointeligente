@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.bolsointeligente.config.Config;
 import com.example.bolsointeligente.R;
 import com.example.bolsointeligente.activities.DicasInvestimentos.DicasInvestimentosAdapter;
 import com.example.bolsointeligente.activities.Acoes.AcaoAdapter;
@@ -173,10 +173,10 @@ public class InvestimentosActivity extends AppCompatActivity {
     }
 
     private void buscarCotacao(String symbol, List<Acao> listaAcoes) {
-        String token = "n19XAYTLiKQZXjNSXeqkow";
+        String token = Config.loadProperties(this);
         AcaoApiService apiService = RetrofitClient.getApiService();
         Call<CotacaoResponse> call = apiService.getCotacao(symbol, token);
-
+        Log.d("Token", "Token via config:" + token);
         call.enqueue(new Callback<CotacaoResponse>() {
             @Override
             public void onResponse(Call<CotacaoResponse> call, Response<CotacaoResponse> response) {
@@ -184,7 +184,6 @@ public class InvestimentosActivity extends AppCompatActivity {
                     // Acessando os resultados dentro da resposta
                     CotacaoResponse cotacaoResponse = response.body();
                     List<CotacaoAcaoResponse> cotacoes = cotacaoResponse.getResults();
-
                     // Garantir que a lista não está vazia
                     if (!cotacoes.isEmpty()) {
                         CotacaoAcaoResponse cotacao = cotacoes.get(0); // Pegando o primeiro item da lista

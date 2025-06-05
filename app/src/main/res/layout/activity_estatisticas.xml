@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/fundoCurvado3" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iconefiltro"
         android:layout_width="46dp"
         android:layout_height="57dp"
         android:layout_marginTop="44dp"
@@ -113,7 +113,7 @@
                     <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/pie_chart_despesas_categoria"
                         android:layout_width="match_parent"
-                        android:layout_height="330dp" />
+                        android:layout_height="350dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
