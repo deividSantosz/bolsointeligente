@@ -114,8 +114,12 @@ public class MenuActivity extends AppCompatActivity {
 private void carregarTransacoes() {
         List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
         if (transacoes != null && !transacoes.isEmpty()) {
+            List<Transacao> transacoesLimitadas = transacoes.size() > 4
+                    ? transacoes.subList(0, 4)
+                    : transacoes;
+
             adapter.listaTransacoes.clear();
-            adapter.listaTransacoes.addAll(transacoes);
+            adapter.listaTransacoes.addAll(transacoesLimitadas);
             adapter.notifyDataSetChanged();
         }
     }

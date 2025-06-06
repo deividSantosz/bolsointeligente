@@ -116,6 +116,9 @@ public class TransacoesActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.home) {
+                    Intent intent = new Intent(TransacoesActivity.this, MenuActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
                     return true;
                 } else if (itemId == R.id.estatisticas) {
                     Intent intent = new Intent(TransacoesActivity.this, EstatisticasActivity.class);
@@ -134,7 +137,6 @@ public class TransacoesActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.setSelectedItemId(R.id.home);
     }
     private void carregarTransacoes() {
         List<Transacao> transacoes = transacaoDao.listarTransacoesPorUsuario(usuarioId);
