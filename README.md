@@ -6,7 +6,7 @@ Aplicativo mobile de finanças pessoais desenvolvido como parte do Trabalho de C
 
 ## 🚀 Funcionalidades Principais
 
-- 📊 **Dashboard de Gastos** (Em construção)
+- 📊 **Dashboard de Gastos** 
   - Visualização clara das receitas, despesas e saldo.
   - Gráficos ilustrativos com feedback do comportamento financeiro.
 
