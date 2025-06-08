@@ -132,6 +132,7 @@ private void carregarTransacoes() {
 
         Double despesas = 0.0;
         Double entradas = 0.0;
+        Double despesasliquidas = 0.0;
         for (Transacao transacao : transacoes) {
             double valor = transacao.getValor();
             if (valor < 0) {
@@ -140,9 +141,10 @@ private void carregarTransacoes() {
                 entradas += valor;
             }
         }
+        despesasliquidas = despesas - entradas;
         Double saldo = renda + entradas - despesas;
         txt_renda.setText(String.format("%.2f", renda));
-        txt_despesas.setText(String.format("%.2f", despesas));
+        txt_despesas.setText(String.format("%.2f", despesasliquidas));
         txt_saldo.setText(String.format("%.2f", saldo));
     }
 
