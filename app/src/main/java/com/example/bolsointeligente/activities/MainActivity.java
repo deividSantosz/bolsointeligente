@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         usuario.telefone = "73998432784";
         usuario.senha = "teste123";
 
-        db.usuarioDao().insereUsuario(usuario); // Inserir o usuário no banco
+        db.usuarioDao().insereUsuario(usuario);
 
     }
 }

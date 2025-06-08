@@ -36,7 +36,7 @@ public class DicasInvestimentosAdapter extends RecyclerView.Adapter<ViewHolderIt
         Context context = holder.itemView.getContext();
 
         holder.saibaMais.setOnClickListener(v -> {
-            Intent intent = new Intent(context, dica.getActivityDestino()); // Aqui pegamos a Activity correspondente
+            Intent intent = new Intent(context, dica.getActivityDestino());
             context.startActivity(intent);
         });
     }

@@ -135,7 +135,7 @@ public class EstatisticasActivity extends AppCompatActivity {
                 if (t.getData() > dataMax) dataMax = t.getData();
             }
         } else {
-            dataMin = 0L; // Define um padrão se não houver transações
+            dataMin = 0L;
             dataMax = System.currentTimeMillis();
         }
 
@@ -191,7 +191,6 @@ public class EstatisticasActivity extends AppCompatActivity {
         });
 
         builder.setTitle("Filtrar por Período");
-        // Botão para aplicar o filtro de datas
         builder.setPositiveButton("Aplicar", (dialog, which) -> {
             if (tempCalFim.before(tempCalInicio)) {
                 Toast.makeText(this, "Data final não pode ser anterior à data inicial.", Toast.LENGTH_LONG).show();
@@ -205,9 +204,7 @@ public class EstatisticasActivity extends AppCompatActivity {
 
             atualizarGraficosComBaseNoPeriodo(dataInicioSelecionada.getTimeInMillis(), dataFimSelecionada.getTimeInMillis());
         });
-        // Botão para cancelar
         builder.setNegativeButton("Cancelar", null);
-        // Botão para limpar o filtro e mostrar tudo
         builder.setNeutralButton("Mostrar Todos", (dialog, which) -> {
             Toast.makeText(this, "Exibindo todas as transações", Toast.LENGTH_SHORT).show();
             carregarGraficosComTodosOsDados();
@@ -216,7 +213,6 @@ public class EstatisticasActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-
     private void atualizarGraficosComBaseNoPeriodo(long dataInicioMillis, long dataFimMillis) {
         Log.d("EstatisticasActivity", "Filtrando de: " + formatoDataView.format(dataInicioMillis) + " ate " + formatoDataView.format(dataFimMillis));
         List<Transacao> transacoesFiltradas = transacaoDao.listarTransacoesPorUsuarioEPeriodo(usuarioId, dataInicioMillis, dataFimMillis);
@@ -224,9 +220,6 @@ public class EstatisticasActivity extends AppCompatActivity {
         setupPieChartComDados(transacoesFiltradas);
         setupBarChartComDados(transacoesFiltradas, dataInicioMillis, dataFimMillis);
     }
-
-    // setupPieChart agora recebe a lista de transações
-    // Dentro da sua classe EstatisticasActivity
 
     private void setupPieChartComDados(List<Transacao> transacoesDoPeriodo) {
         if (transacoesDoPeriodo == null || transacoesDoPeriodo.isEmpty()) {
@@ -271,9 +264,6 @@ public class EstatisticasActivity extends AppCompatActivity {
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
 
-        // Configuração das cores (sua lógica de cores aqui)
-        // ...
-        // Exemplo:
         Map<String, Integer> coresDasCategorias = new HashMap<>();
         coresDasCategorias.put("Alimentação", Color.parseColor("#FF0000"));
         coresDasCategorias.put("Saúde", Color.parseColor("#368FF4"));
@@ -329,14 +319,10 @@ public class EstatisticasActivity extends AppCompatActivity {
         pieChart.animateY(1000);
         pieChart.invalidate();
     }
-
-    // setupBarChart agora recebe a lista de transações e as datas para gerar os meses
     private void setupBarChartComDados(List<Transacao> transacoesDoPeriodo, long dataInicioPeriodo, long dataFimPeriodo) {
         Double rendaMensalDouble = null;
         if (usuarioDao != null) { // usuarioDao já foi inicializado em onCreate
             rendaMensalDouble = usuarioDao.getUserRenda(usuarioId);
-        } else {
-            Log.e("EstatisticasActivity", "UsuarioDao é NULO ao tentar obter renda.");
         }
 
         float rendaMensalParaGrafico = 0f;
@@ -371,13 +357,11 @@ public class EstatisticasActivity extends AppCompatActivity {
         final ArrayList<String> xAxisLabels = new ArrayList<>();
         int index = 0;
 
-        // Gerar rótulos de meses para o período selecionado
         Calendar calInicio = Calendar.getInstance();
         calInicio.setTimeInMillis(dataInicioPeriodo);
         Calendar calFim = Calendar.getInstance();
         calFim.setTimeInMillis(dataFimPeriodo);
 
-        // Normaliza para o início do mês de início e fim do mês de fim para iterar
         calInicio.set(Calendar.DAY_OF_MONTH, 1);
 
         while (!calInicio.after(calFim)) {
@@ -426,12 +410,9 @@ public class EstatisticasActivity extends AppCompatActivity {
             xAxis.setGranularity(1f);
             xAxis.setGranularityEnabled(true);
             xAxis.setCenterAxisLabels(true);
-            xAxis.setAxisMinimum(0f); // Ajustado para o início dos grupos
-            xAxis.setAxisMaximum(index); // Ajustado para o número de grupos
-            // Se groupBars é usado, o XAxis deve cobrir a largura total dos grupos.
-            // O valor de x para groupBars é o 'fromX', o início do primeiro grupo.
-            // O eixo X precisa ter um range de 'fromX' até 'fromX + número_de_grupos'.
-            // Se fromX é 0f, então o máximo é 'index'.
+            xAxis.setAxisMinimum(0f);
+            xAxis.setAxisMaximum(index);
+
 
             YAxis leftAxis = barChart.getAxisLeft();
             leftAxis.setAxisMinimum(0f);

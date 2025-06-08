@@ -10,15 +10,13 @@ public class RetrofitClient {
 
     public static AcaoApiService getApiService() {
         if (retrofit == null) {
-            // Cria o Gson com a configuração leniente
             Gson gson = new GsonBuilder()
-                    .setLenient() // Define que o Gson deve ser leniente
+                    .setLenient()
                     .create();
             String baseUrl = "https://brapi.dev/api/";
-           // String baseUrl = ("https://brapi.dev/api/quote/" + ticket +"?&token=" + token);
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl) // Base URL sem token ou ticket
-                    .addConverterFactory(GsonConverterFactory.create(gson)) // Usa o Gson configurado
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit.create(AcaoApiService.class);

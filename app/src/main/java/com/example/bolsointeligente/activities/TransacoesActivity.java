@@ -92,11 +92,11 @@ public class TransacoesActivity extends AppCompatActivity {
                 int iconSize = 100;
                 int iconMargin = 50;
 
-                if (dX > 0) {  // Swipe para a direita (Editar)
+                if (dX > 0) {
                     int corVerde = ContextCompat.getColor(getApplicationContext(), R.color.primaria);
                     paint.setColor(corVerde);
                     background = new RectF(itemViewLeft, itemViewTop, itemViewLeft + dX, itemViewBottom);
-                } else {  // Swipe para a esquerda (Excluir)
+                } else {
                     paint.setColor(Color.RED);
                     background = new RectF(itemViewRight + dX, itemViewTop, itemViewRight, itemViewBottom);
 

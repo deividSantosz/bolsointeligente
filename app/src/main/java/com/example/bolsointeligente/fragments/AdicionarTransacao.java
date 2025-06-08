@@ -71,11 +71,9 @@ public class AdicionarTransacao extends Fragment {
         editDate = view.findViewById(R.id.edit_date);
         btnAddTransaction = view.findViewById(R.id.btn_add_transaction);
 
-        // Inicializar o DAO do Room Database
         transacaoDao = db.transacaoDao();
 
 
-        //pegando os dados em caso de edição
         Bundle bundle = getArguments();
         if (bundle != null) {
             int transacaoId = bundle.getInt("transacaoId", -1);
@@ -84,9 +82,6 @@ public class AdicionarTransacao extends Fragment {
                 btnAddTransaction.setText("Editar");
             }
         }
-
-
-        // Lista de categorias para o AutoCompleteTextView
         String[] categorias = {"Alimentação", "Transporte", "Lazer", "Saúde", "Outros", "Animal", "Educação", "Investimentos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, categorias);
         autoCompleteCategory.setAdapter(adapter);
@@ -96,13 +91,12 @@ public class AdicionarTransacao extends Fragment {
             }
         });
 
-        // Configurar campo de data para abrir um DatePickerDialog
         editDate.setOnClickListener(v -> mostrarDatePicker());
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                isSaida = tab.getPosition() == 1; // Índice 1 representa "Saída"
+                isSaida = tab.getPosition() == 1;
             }
 
             @Override
@@ -111,9 +105,8 @@ public class AdicionarTransacao extends Fragment {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
-        // Configurar botão para salvar a transação
         btnAddTransaction.setOnClickListener(view2 -> {
-            salvarTransacao(); // Salva a transação antes de trocar de tela
+            salvarTransacao();
             Intent intent = new Intent(requireContext(), MenuActivity.class);
             startActivity(intent);
         });
@@ -166,7 +159,6 @@ public class AdicionarTransacao extends Fragment {
         transacao.setIdUsuario(usuarioId);
 
         if (transacaoId != -1) {
-            // Edição de transação existente
             transacao.setId(transacaoId);
             transacaoDao.atualizarTransacao(transacao);
             Toast.makeText(getContext(), "Transação atualizada com sucesso!", Toast.LENGTH_SHORT).show();
@@ -184,11 +176,9 @@ public class AdicionarTransacao extends Fragment {
             editValor.setText(String.valueOf(Math.abs(transacao.getValor())));
             autoCompleteCategory.setText(transacao.getCategoria());
 
-            // Formata a data para exibição
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             editDate.setText(formato.format(transacao.getData()));
 
-            // Seleciona a tab correta (entrada/saída)
             isSaida = transacao.getValor() < 0;
             tabLayout.getTabAt(isSaida ? 1 : 0).select();
         }

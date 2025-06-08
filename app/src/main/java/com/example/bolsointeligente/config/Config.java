@@ -14,8 +14,7 @@ public class Config {
             InputStream inputStream = assetManager.open("config.properties");
             properties.load(inputStream);
             String token = properties.getProperty("token");
-            Log.d("Config", "Token carregado: " + token);
-            return token; // Verificação
+            return token;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

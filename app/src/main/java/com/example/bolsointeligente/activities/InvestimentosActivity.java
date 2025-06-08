@@ -91,7 +91,6 @@ public class InvestimentosActivity extends AppCompatActivity {
                     recyclerViewAcao.setVisibility(View.VISIBLE);
                     recyclerViewRendaFixa.setVisibility(View.GONE);
                 } else if (tab.getPosition() == 1) {
-                    // Aba de Renda Fixa
                     recyclerViewAcao.setVisibility(View.GONE);
                     recyclerViewRendaFixa.setVisibility(View.VISIBLE);
                 }
@@ -176,7 +175,6 @@ public class InvestimentosActivity extends AppCompatActivity {
         String token = Config.loadProperties(this);
         AcaoApiService apiService = RetrofitClient.getApiService();
         Call<CotacaoResponse> call = apiService.getCotacao(symbol, token);
-        Log.d("Token", "Token via config:" + token);
         call.enqueue(new Callback<CotacaoResponse>() {
             @Override
             public void onResponse(Call<CotacaoResponse> call, Response<CotacaoResponse> response) {
@@ -184,15 +182,11 @@ public class InvestimentosActivity extends AppCompatActivity {
                     // Acessando os resultados dentro da resposta
                     CotacaoResponse cotacaoResponse = response.body();
                     List<CotacaoAcaoResponse> cotacoes = cotacaoResponse.getResults();
-                    // Garantir que a lista não está vazia
                     if (!cotacoes.isEmpty()) {
-                        CotacaoAcaoResponse cotacao = cotacoes.get(0); // Pegando o primeiro item da lista
-
-                        Log.d("API Response", "Cotação recebida: " + cotacao.toString());
+                        CotacaoAcaoResponse cotacao = cotacoes.get(0);
                         String preco = String.format("%.2f", cotacao.getRegularMarketPrice());
                         String variacao = String.format("%.2f%%", cotacao.getChangePercent());
 
-                        // Atualizando a lista de ações
                         listaAcoes.add(new Acao(
                                 cotacao.getSymbol(),
                                 cotacao.getNome(),

@@ -27,15 +27,13 @@ public class FundoCurvado extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Cria a curva na parte inferior
         path.reset();
-        path.moveTo(0, 0); // Inicia no canto superior esquerdo
-        path.lineTo(getWidth(), 0); // Linha até o canto superior direito
-        path.lineTo(getWidth(), getHeight() - 100); // Linha até o final da altura menos um pouco
-        path.quadTo(getWidth() / 2f, getHeight(), 0, getHeight() - 100); // Curva para o canto inferior esquerdo
+        path.moveTo(0, 0);
+        path.lineTo(getWidth(), 0);
+        path.lineTo(getWidth(), getHeight() - 100);
+        path.quadTo(getWidth() / 2f, getHeight(), 0, getHeight() - 100);
         path.close();
 
-        // Desenha o caminho com a cor sólida
         canvas.drawPath(path, paint);
     }
 }
