@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,7 @@ public class AdicionarTransacao extends Fragment {
     private AutoCompleteTextView autoCompleteCategory;
     private EditText editDescricao, editValor, editDate;
     private Button btnAddTransaction;
+    private ImageView btnVoltar;
     Database db;
     private TabLayout tabLayout;
     private boolean isSaida = false;
@@ -70,10 +72,13 @@ public class AdicionarTransacao extends Fragment {
         editValor = view.findViewById(R.id.edit_valor);
         editDate = view.findViewById(R.id.edit_date);
         btnAddTransaction = view.findViewById(R.id.btn_add_transaction);
+        btnVoltar = view.findViewById(R.id.btn_voltar);
 
         transacaoDao = db.transacaoDao();
 
-
+        btnVoltar.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
         Bundle bundle = getArguments();
         if (bundle != null) {
             int transacaoId = bundle.getInt("transacaoId", -1);
