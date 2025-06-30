@@ -39,6 +39,13 @@ public class MenuActivity extends AppCompatActivity {
 
      BottomNavigationView bottomNavigationView;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        atualizarDadosFinanceiros();
+        carregarTransacoes();
+    }
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -60,8 +60,8 @@
 
         <TextView
             android:id="@+id/txt_fundosimobiliarios"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="370dp"
+            android:layout_height="97dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
@@ -69,6 +69,7 @@
             android:text="Ações são pequenas partes de uma empresa que você pode comprar. Ao adquirir ações, você se torna sócio da empresa e participa dos seus resultados."
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
